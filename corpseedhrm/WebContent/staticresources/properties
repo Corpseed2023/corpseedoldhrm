@@ -1,0 +1,13 @@
+path=home/site/wwwroot/
+
+corpseed_token=CP27102021ITES1
+loginuID=corpseed
+loginuaid=178
+domain=https://crm.corpseed.com/
+corpseed_domain=https://www.corpseed.com/
+
+azure_key=DefaultEndpointsProtocol=https;AccountName=corpseeds;AccountKey=A+mKGi2AQc+Jl+O7x6pQ7OZb5Fu1kTPq/ooXRTTVX+Opzk9xOMiLGVx/h0mOLwJxnYsYDHyhD8mY9slX5/rcHQ==;EndpointSuffix=core.windows.net
+azure_container=corpseed-crm
+azure_path=https://corpseeds.blob.core.windows.net/corpseed-crm/
+
+Bitrix24=https://corpseed.bitrix24.in/rest/6/yut1cxd9hgnasus0/

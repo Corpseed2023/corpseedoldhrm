@@ -1,0 +1,1647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE urlrewrite   PUBLIC "-//tuckey.org//DTD UrlRewrite 2.6//EN" "http://www.tuckey.org/res/dtds/urlrewrite2.6.dtd">
+<urlrewrite>
+  
+	<rule>
+		<from>^/$</from>
+		<to>/index</to>
+	</rule>
+
+	<rule>
+		<from>^/(dashboard.html)$</from>
+		<to>/Dashboard111</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-rating.html)$</from>
+		<to>/UpdateRating111</to>
+	</rule>
+
+	<rule>
+		<from>^/(invoice-*.*html)$</from>
+		<to>/InvoicePrint111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(generateinvoice-*.*html)$</from>
+		<to>/GeneratedInvoice111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(slip-*.*html)$</from>
+		<to>/PaymentSlip111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(final-invoice-*.*html)$</from>
+		<to>/FinalInvoice111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(estimatereceipt-*.*html)$</from>
+		<to>/EstimateReceipt111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(payment-*.*html)$</from>
+		<to>/PaymentReceipt111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(sales-invoice-*.*html)$</from>
+		<to>/SalesInvoicePrint111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(track-invoice.html)$</from>
+		<to>/TrackInvoice111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(compliance-check.html)$</from>
+		<to>/ComplianceCheck111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(newwebuser.html)$</from>
+		<to>/Registration111</to>
+	</rule>
+
+	<rule>
+		<from>^/(notifications.html)$</from>
+		<to>/Notifications111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(all-notifications.html)$</from>
+		<to>/AllNotifications111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(usercreate.html)$</from>
+		<to>/UserCreate111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(managewebuser.html)$</from>
+		<to>/Manage-User111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(user-sales-permission.html)$</from>
+		<to>/usersalespermission111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(user-company-permission.html)$</from>
+		<to>/usercompanypermission111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(clientadmin.html)$</from>
+		<to>/clientadmin111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(manage-estimate.html)$</from>
+		<to>/ManageEstimate111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(billreceiptprint.html)$</from>
+		<to>/BillReceiptPrint111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(estimatedinvoice.html)$</from>
+		<to>/EstimateInvoice111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(converttopdf.html)$</from>
+		<to>/ConvertToPdf111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(get-company-details.html)$</from>
+		<to>/GetCompanyDetails111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(get-user-details.html)$</from>
+		<to>/GetUserDetails111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(get-client-details.html)$</from>
+		<to>/GetClientDetails111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(get-folder-details.html)$</from>
+		<to>/GetFolderDetails111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(login.html)$</from>
+		<to>/Login111</to>
+	</rule>
+
+	<rule>
+		<from>^/(forget-password.html)$</from>
+		<to>/ForgetPassword111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(reset-link.html)$</from>
+		<to>/SendResetLink111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(reset-password.html)$</from>
+		<to>/ResetPassword111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(update-forget-password.html)$</from>
+		<to>/UpdateForgetPassword111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(logout.html)$</from>
+		<to>/Logout111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(profile.html)$</from>
+		<to>/Profile111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(updateuser.html)$</from>
+		<to>/UpdateUser111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(notification.html)$</from>
+		<to>/Notification111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(changepassword.html)$</from>
+		<to>/ChangePassword111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(changepasswordByAdmin-*.*html)$</from>
+		<to>/changepasswordByAdmin111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(update-passwordByAdmin.html)$</from>
+		<to>/updatepasswordByAdmin111</to>
+	</rule>
+	
+		<rule>
+		<from>^/(follow-up-billing.html)$</from>
+		<to>/FollowUpBilling111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(follow-up-amc.html)$</from>
+		<to>/FollowUpAMC111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(amc-billing.html)$</from>
+		<to>/AMCBilling111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(send-email.html)$</from>
+		<to>/SendEmail111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(getalluser.html)$</from>
+		<to>/GetAllUser111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(download-file.html)$</from>
+		<to>/DownloadFile111</to>
+	</rule>
+
+	<rule>
+		<from>^/(download-estimate-invoices.html)$</from>
+		<to>/DownloadEstimateInvoice111</to>
+	</rule>
+
+	<rule>
+		<from>^/(download-sales-invoices.html)$</from>
+		<to>/DownloadSalesInvoice111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(send-sms.html)$</from>
+		<to>/SendSms111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(edituser.html)$</from>
+		<to>/EditUser111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(update-password.html)$</from>
+		<to>/UpdatePassword111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(new-folder.html)$</from>
+		<to>/NewFolder111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(update-profile.html)$</from>
+		<to>/UpdateProfile111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(editprofile.html)$</from>
+		<to>/EditProfile111</to>
+	</rule>
+
+	<rule>
+		<from>^/(client-registration.html)$</from>
+		<to>/ClientRegistration111</to>
+	</rule>
+
+	<rule>
+		<from>^/(project-registration.html)$</from>
+		<to>/ProjectRegistration111</to>
+	</rule>
+
+	<rule>
+		<from>^/(billing.html)$</from>
+		<to>/Billing111?uid=$1</to>
+	</rule>
+
+    <rule>
+		<from>^/(amc-account.html)$</from>
+		<to>/AMCAccount111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-billing.html)$</from>
+		<to>/ManageBilling111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(unbilled.html)$</from>
+		<to>/unbilled111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(all-invoice.html)$</from>
+		<to>/Invoiced111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(openpayrollhistory.html)$</from>
+		<to>/OpenPayrollHistory111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-project.html)$</from>
+		<to>/ManageProject111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-client.html)$</from>
+		<to>/ManageClient111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(register-client.html)$</from>
+		<to>/RegisterClient111</to>
+	</rule>
+
+	<rule>
+		<from>^/(register-project.html)$</from>
+		<to>/RegisterProject111</to>
+	</rule>
+
+	<rule>
+		<from>^/(billingclient.html)$</from>
+		<to>/BillingClient111</to>
+	</rule>
+
+	<rule>
+		<from>^/(editclient.html)$</from>
+		<to>/EditClient111?uid=$1</to>
+	</rule>
+	<rule>
+		<from>^/(editbill.html)$</from>
+		<to>/EditBill111</to>
+	</rule>
+	<rule>
+		<from>^/(editproject.html)$</from>
+		<to>/EditProject111?uid=$1</to>
+	</rule>
+	<rule>
+		<from>^/(update-project.html)$</from>
+		<to>/UpdateProject111</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-client.html)$</from>
+		<to>/UpdateClient111</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-bill.html)$</from>
+		<to>/UpdateBill111</to>
+	</rule>
+
+	<rule>
+		<from>^/(task-list.html)$</from>
+		<to>/TaskList111</to>
+	</rule>
+
+	<rule>
+		<from>^/(off-page-seo-techniques.html)$</from>
+		<to>/OffPageSEOTech111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-seo.html)$</from>
+		<to>/ManageSeo111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-seo/page-.*.html)$</from>
+		<to>/ManageSeoPage111?page_no=$1</to>
+	</rule>
+
+   <rule>
+		<from>^/(getnewproduct.html)$</from>
+		<to>/GetNewProductName111</to>
+	</rule>
+
+   <rule>
+		<from>^/(getloginuser.html)$</from>
+		<to>/GetLoginUser111</to>
+	</rule>
+
+	<rule>
+		<from>^/(gettriggerdetails.html)$</from>
+		<to>/GetTriggerDetails111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getproduct.html)$</from>
+		<to>/GetProductName111</to>
+	</rule>
+
+   <rule>
+		<from>^/(getAllTaxInJson.html)$</from>
+		<to>/GetAllTaxInJson111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getclientname.html)$</from>
+		<to>/GetClientName111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getprojectname.html)$</from>
+		<to>/GetProjectName111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getassignby.html)$</from>
+		<to>/GetAssignedBy111</to>
+	</rule>
+
+	<rule>
+		<from>^/(assign-task.html)$</from>
+		<to>/AssignTask111</to>
+	</rule>
+
+	<rule>
+		<from>^/(task-master.html)$</from>
+		<to>/TaskMaster111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-task.html)$</from>
+		<to>/ManageTask111</to>
+	</rule>
+
+	<rule>
+		<from>^/(edittask-*.*html)$</from>
+		<to>/EditTask111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(assignmytask-*.*html)$</from>
+		<to>/AssignMyTask111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(task-update.html)$</from>
+		<to>/UpdateTask111</to>
+	</rule>
+
+	<rule>
+		<from>^/(seo-in.html)$</from>
+		<to>/SeoIn111</to>
+	</rule>
+
+	<rule>
+		<from>^/(gettaskname.html)$</from>
+		<to>/GetTaskName111</to>
+	</rule>
+
+	<rule>
+		<from>^/(editseo.html)$</from>
+		<to>/EditSeo111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(view-seo.html)$</from>
+		<to>/ViewSeo111</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-seo.html)$</from>
+		<to>/UpdateSeo111</to>
+	</rule>
+
+	<rule>
+		<from>^/(content.html)$</from>
+		<to>/Content111</to>
+	</rule>
+
+	<rule>
+		<from>^/(savecontent.html)$</from>
+		<to>/SaveContent111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-product.html)$</from>
+		<to>/ManageProduct111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(download-history.html)$</from>
+		<to>/DownloadHistory111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(export-history.html)$</from>
+		<to>/ExportHistory111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(managetransactions.html)$</from>
+		<to>/ManageTransactions111?uid=$1</to>
+	</rule>
+		
+	<rule>
+		<from>^/(addsalespaymentdetails.html)$</from>
+		<to>/AddSalesPaymentDetails111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(addestimatepayment.html)$</from>
+		<to>/AddEstimatePayment111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(htmltopdfreceipt.html)$</from>
+		<to>/HTMLTOPDFRECEIPT111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(setProductPrice-*.*html)$</from>
+		<to>/SetProductPrice111?uid=$1</to>
+	</rule>
+	<rule>
+		<from>^/(setEnqPrice-*.*html)$</from>
+		<to>/SetEnqPrice111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(setPrice-*.*html)$</from>
+		<to>/SetPrice111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(editproduct-*.*html)$</from>
+		<to>/EditProduct111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(viewProduct-*.*html)$</from>
+		<to>/ViewProduct111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(add-product.html)$</from>
+		<to>/AddProduct111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(markasread.html)$</from>
+		<to>/MarkAsRead111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(markasreadclient.html)$</from>
+		<to>/MarkAsReadClient111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(markallasread.html)$</from>
+		<to>/MarkAllAsRead111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(markallasreadclient.html)$</from>
+		<to>/MarkAllAsReadClient111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(clientpaymentbyadmin.html)$</from>
+		<to>/ClientPaymentByAdmin111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(confirmclientpaymentbyadmin.html)$</from>
+		<to>/ConfirmClientPaymentByAdmin111</to>
+	</rule>
+
+	<rule>
+		<from>^/(add-servicetype.html)$</from>
+		<to>/AddServiceType111</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-ProductCTRL.html)$</from>
+		<to>/UpdateProduct111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getemplate.html)$</from>
+		<to>/GetTemplate111</to>
+	</rule>
+
+	<rule>
+		<from>^/(add-ProductCTRL.html)$</from>
+		<to>/AddProductCTRL111</to>
+	</rule>
+
+	<rule>
+		<from>^/(registerproduct.html)$</from>
+		<to>/RegisterProductCTRL111</to>
+	</rule>
+		
+	<rule>
+		<from>^/(manage-template.html)$</from>
+		<to>/ManageTemplate111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(manageguide.html)$</from>
+		<to>/ManageGuide111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(managetrigger.html)$</from>
+		<to>/ManageTrigger111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(managetax.html)$</from>
+		<to>/ManageTax111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(manageteam.html)$</from>
+		<to>/ManageTeam111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(managecontacts.html)$</from>
+		<to>/ManageContacts111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-content.html)$</from>
+		<to>/ManageContent111</to>
+	</rule>
+
+	<rule>
+		<from>^/(editcontent.html)$</from>
+		<to>/EditContent111</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-content.html)$</from>
+		<to>/UpdateContent111</to>
+	</rule>
+
+	<rule>
+		<from>^/(mytask.html)$</from>
+		<to>/MyTaskDetails111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(managedelivery.html)$</from>
+		<to>/ManageDelivery111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(document-collection.html)$</from>
+		<to>/DocumentCollection111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(mydocument.html)$</from>
+		<to>/MyDocument111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(upload-document.html)$</from>
+		<to>/UploadDocument111</to>
+	</rule>
+
+	<rule>
+		<from>^/(new-file.html)$</from>
+		<to>/NewFile111</to>
+	</rule>
+
+	<rule>
+		<from>^/(subdocuments-*.*html)$</from>
+		<to>/MySubDocuments111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(personalfiles-*.*html)$</from>
+		<to>/PersonalFiles111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(viewalldocuments-*.*html)$</from>
+		<to>/ViewAllDocuments999?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(documentfiles-*.*html)$</from>
+		<to>/DocumentFile111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(folder-access.html)$</from>
+		<to>/FolderAccess111?uid=$1</to>
+	</rule>
+
+     <rule>
+		<from>^/(sub-folder-access.html)$</from>
+		<to>/SubFolderAccess111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(viewdetails-*.*html)$</from>
+		<to>/ViewDetails111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(view-completed-task.html)$</from>
+		<to>/ViewCompletedTask111</to>
+	</rule>
+
+	<rule>
+		<from>^/(editdailyexpenses-*.*html)$</from>
+		<to>/EditDailyExpense111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(viewcompany-*.*html)$</from>
+		<to>/ViewCompany111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(seoreg.html)$</from>
+		<to>/SeoInReg111</to>
+	</rule>
+
+<!-- 	<rule> -->
+<!-- 		<from>^/(nonseo-task.html)$</from> -->
+<!-- 		<to>/NonSeoTask111</to> -->
+<!-- 	</rule> -->
+
+	<rule>
+		<from>^/(nonseo-manage-task.html)$</from>
+		<to>/NonSeoManageTask111</to>
+	</rule>
+
+	<rule>
+		<from>^/(nonseo-task-add.html)$</from>
+		<to>/NonSeoTaskAdd111</to>
+	</rule>
+
+<!-- 	<rule> -->
+<!-- 		<from>^/(viewnonseotask.html)$</from> -->
+<!-- 		<to>/NonSeoTaskView111</to> -->
+<!-- 	</rule> -->
+
+<!-- 	<rule> -->
+<!-- 		<from>^/(editnonseotask.html)$</from> -->
+<!-- 		<to>/NonSeoTaskEdit111</to> -->
+<!-- 	</rule> -->
+
+	<rule>
+		<from>^/(update-daily-expenses.html)$</from>
+		<to>/UpdateDailyExpenses111</to>
+	</rule>
+
+	<rule>
+		<from>^/(nonseo-task-update.html)$</from>
+		<to>/NonSeoTaskUpdate111</to>
+	</rule>
+
+	<rule>
+		<from>^/(generate-invoice.html)$</from>
+		<to>/GenerateInvoice111</to>
+	</rule>
+
+	<rule>
+		<from>^/(invoice-summary.html)$</from>
+		<to>/InvoiceSummary111</to>
+	</rule>
+
+	<rule>
+		<from>^/(generate-invoice-new.html)$</from>
+		<to>/GenerateInvoiceNew111</to>
+	</rule>
+
+	<rule>
+		<from>^/(viewinvoice-.*.html)$</from>
+		<to>/InvoiceView111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(viewdailyexpenses-.*.html)$</from>
+		<to>/ViewDailyExpense111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(editinvoice.html)$</from>
+		<to>/InvoiceEdit111</to>
+	</rule>
+
+	<rule>
+		<from>^/(generate-invoice-update.html)$</from>
+		<to>/InvoiceUpdate111</to>
+	</rule>
+
+	<rule>
+		<from>^/(generate-payment.html)$</from>
+		<to>/GeneratePayment111</to>
+	</rule>
+
+	<rule>
+		<from>^/(payment-summary.html)$</from>
+		<to>/PaymentSummary111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(getemployeestr.html)$</from>
+		<to>/GetEmployeeStr111</to>
+	</rule>
+
+	<rule>
+		<from>^/(generate-payment-new.html)$</from>
+		<to>/GeneratePaymentNew111</to>
+	</rule>
+
+	<rule>
+		<from>^/(editpayment.html)$</from>
+		<to>/PaymentEdit111</to>
+	</rule>
+
+	<rule>
+		<from>^/(generate-payment-update.html)$</from>
+		<to>/PaymentUpdate111</to>
+	</rule>
+
+	<rule>
+		<from>^/(viewpayment.html)$</from>
+		<to>/PaymentView111</to>
+	</rule>
+
+	<rule>
+		<from>^/(show-task-content.html)$</from>
+		<to>/ShowTaskContent111</to>
+	</rule>
+
+	<rule>
+		<from>^/(newestimatesale.html)$</from>
+		<to>/AddEnquiry111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-sales.html)$</from>
+		<to>/ManageEnquiry111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(follow-up-sales.html)$</from>
+		<to>/FollowUpSales111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(get-enquiry.html)$</from>
+		<to>/GetEnquiry111</to>
+	</rule>
+
+	<rule>
+		<from>^/(enquiry-add.html)$</from>
+		<to>/EnquiryAdd111</to>
+	</rule>
+
+	<rule>
+		<from>^/(create-invoice.html)$</from>
+		<to>/CreateInvoice111</to>
+	</rule>
+
+	<rule>
+		<from>^/(enquiry-edit.html)$</from>
+		<to>/EnquiryEdit111</to>
+	</rule>
+
+	<rule>
+		<from>^/(follow-up-form.html)$</from>
+		<to>/FollowUpForm111</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-report.html)$</from>
+		<to>/UpdateReport111</to>
+	</rule>
+
+	<rule>
+		<from>^/(seo-report.html)$</from>
+		<to>/SEOReport111</to>
+	</rule>
+
+	<rule>
+		<from>^/(search-seo-report.html)$</from>
+		<to>/SearchSEOReport111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Attendance.html)$</from>
+		<to>/Attendance111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Manage-Attendance.html)$</from>
+		<to>/ManageAttendance111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(Salary-Structure.html)$</from>
+		<to>/Salary111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Daily-Expense.html)$</from>
+		<to>/DailyExpense111</to>
+	</rule>
+
+	<rule>
+		<from>^/(addNewExpense.html)$</from>
+		<to>/AddNewExpense111</to>
+	</rule>
+
+	<rule>
+		<from>^/(addrefundincome.html)$</from>
+		<to>/AddRefundIncome111</to>
+	</rule>
+
+	<rule>
+		<from>^/(refundNewExpense.html)$</from>
+		<to>/RefundNewExpense111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Manage-Daily-Expense.html)$</from>
+		<to>/ManageDailyExpense111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(Manage-Daily-Expense/page-.*.html)$</from>
+		<to>/ManageDailyExpensePage111?page_no=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(added-daily-expenses.html)$</from>
+		<to>/AddedDailyExpense111</to>
+	</rule>
+
+	<rule>
+		<from>^/(client-dashboard.html)$</from>
+		<to>/ClientDashboard111</to>
+	</rule>
+
+	<rule>
+		<from>^/(client-seo-report.html)$</from>
+		<to>/ClientReport111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getprojectbyclient.html)$</from>
+		<to>/ProjectByClient111</to>
+	</rule>
+
+	<rule>
+		<from>^/(register-company.html)$</from>
+		<to>/RegisterCompany111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-company.html)$</from>
+		<to>/ManageCompany111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(register-new-company.html)$</from>
+		<to>/RegisterNewCompany111</to>
+	</rule>
+
+	<rule>
+		<from>^/(editcompany.html)$</from>
+		<to>/EditCompany111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-company.html)$</from>
+		<to>/UpdateCompany111</to>
+	</rule>
+
+	<rule>
+		<from>^/(register-employee.html)$</from>
+		<to>/RegisterEmployee111</to>
+	</rule>
+
+	<rule>
+		<from>^/(register-new-employee.html)$</from>
+		<to>/RegisterNewEmployee111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manage-employee.html)$</from>
+		<to>/ManageEmployee111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(viewemployee-*.*html)$</from>
+		<to>/ViewEmployee111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(editemployee.html)$</from>
+		<to>/EditEmployee111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-employee.html)$</from>
+		<to>/UpdateEmployee111</to>
+	</rule>
+
+	<rule>
+		<from>^/(get-employee.html)$</from>
+		<to>/getEmployee999</to>
+	</rule>
+
+	<rule>
+		<from>^/(getregistervalue.html)$</from>
+		<to>/getRegisterValue111</to>
+	</rule>
+
+	<rule>
+		<from>^/(add-salary-structure.html)$</from>
+		<to>/addSalStr111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Manage-Salary-Structure.html)$</from>
+		<to>/ManageSalStr111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(ViewSalaryStructure.html)$</from>
+		<to>/ViewSalStr111</to>
+	</rule>
+
+	<rule>
+		<from>^/(EditSalaryStructure.html)$</from>
+		<to>/EditSalStr111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-salary-structure.html)$</from>
+		<to>/UpdateSalStr111</to>
+	</rule>
+
+	<rule>
+		<from>^/(promote-salary-structure.html)$</from>
+		<to>/PromoteSalary111</to>
+	</rule>
+
+	<rule>
+		<from>^/(promoteemployee.html)$</from>
+		<to>/PromoteEmployee111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Monthly-Salary.html)$</from>
+		<to>/MonthlySalary111</to>
+	</rule>
+
+	<rule>
+		<from>^/(add-monthy-salary.html)$</from>
+		<to>/AddMonthlySalary111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Manage-Monthly-Salary.html)$</from>
+		<to>/ManageMonthlySalary111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(ViewMonthlySalary.html)$</from>
+		<to>/ViewSalMon111</to>
+	</rule>
+
+	<rule>
+		<from>^/(EditMonthlySalary.html)$</from>
+		<to>/EditSalMon111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(update-monthy-salary.html)$</from>
+		<to>/UpdateMonthlySalary111</to>
+	</rule>
+
+	<rule>
+		<from>^/(TDS-details.html)$</from>
+		<to>/TDSHistory111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(Med-details.html)$</from>
+		<to>/MedHistory111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(Add-TDS-details.html)$</from>
+		<to>/AddTdsHistory111</to>
+	</rule>
+
+	<rule>
+		<from>^/(add-tds.html)$</from>
+		<to>/AddTds111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Add-Med-details.html)$</from>
+		<to>/AddMedHistory111</to>
+	</rule>
+
+	<rule>
+		<from>^/(add-med.html)$</from>
+		<to>/AddMed111</to>
+	</rule>
+
+	<rule>
+		<from>^/(ViewTdsDetails.html)$</from>
+		<to>/ViewTds111</to>
+	</rule>
+
+	<rule>
+		<from>^/(ViewMedDetails.html)$</from>
+		<to>/ViewMed111</to>
+	</rule>
+
+	<rule>
+		<from>^/(EditTdsDetails.html)$</from>
+		<to>/EditTds111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(EditMedDetails.html)$</from>
+		<to>/EditMed111</to>
+	</rule>
+
+	<rule>
+		<from>^/(edit-tds.html)$</from>
+		<to>/UpdateTds111</to>
+	</rule>
+
+	<rule>
+		<from>^/(edit-med.html)$</from>
+		<to>/UpdateMed111</to>
+	</rule>
+
+	<rule>
+		<from>^/(gst-history.html)$</from>
+		<to>/GstHistory111</to>
+	</rule>
+
+	<rule>
+		<from>^/(gst-paid.html)$</from>
+		<to>/GstPaid111</to>
+	</rule>
+
+	<rule>
+		<from>^/(company-details.html)$</from>
+		<to>/ClientCompanyDetails111</to>
+	</rule>
+
+	<rule>
+		<from>^/(company-details-edit.html)$</from>
+		<to>/ClientCompanyDetailsEdit111</to>
+	</rule>
+
+	<rule>
+		<from>^/(company-details-update.html)$</from>
+		<to>/ClientCompanyDetailsUpdate111</to>
+	</rule>
+
+	<rule>
+		<from>^/(client-notification.html)$</from>
+		<to>/CNotification111</to>
+	</rule>
+
+	<rule>
+		<from>^/(project-list.html)$</from>
+		<to>/ProjectList111</to>
+	</rule>
+
+	<rule>
+		<from>^/(client-billing.html)$</from>
+		<to>/ClientBilling111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(get-salary-employee.html)$</from>
+		<to>/SalEmp111</to>
+	</rule>
+
+	<rule>
+		<from>^/(followupproject.html)$</from>
+		<to>/FollowUpProject111</to>
+	</rule>
+
+	<rule>
+		<from>^/(assigntask-project.html)$</from>
+		<to>/AssignProject111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(assigntask.html)$</from>
+		<to>/AssignTaskCTRL111</to>
+	</rule>
+
+	<rule>
+		<from>^/(project-follow-up.html)$</from>
+		<to>/ProjectFollowUpForm111</to>
+	</rule>
+
+	<rule>
+		<from>^/(billing-follow-up.html)$</from>
+		<to>/BillingFollowUpForm111</to>
+	</rule>
+
+	<rule>
+		<from>^/(Project-Status.html)$</from>
+		<to>/ProjectStatus111</to>
+	</rule>
+
+	<rule>
+		<from>^/(generate-invoice-payment-.*.html)$</from>
+		<to>/GenerateInvoicePayment111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(getdates.html)$</from>
+		<to>/GetDates111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmorekeywords)$</from>
+		<to>/MoreKeywords111</to>
+	</rule>
+
+	<rule>
+		<from>^/(detailed-seo-report.html)$</from>
+		<to>/DetailedSEOReport111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoretasks)$</from>
+		<to>/getmoretasks111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoreprojects)$</from>
+		<to>/getmoreprojects111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoreclients)$</from>
+		<to>/getmoreclients111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoreattendance)$</from>
+		<to>/getmoreattendance111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoredailyexp)$</from>
+		<to>/getmoredailyexp111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoremonsal)$</from>
+		<to>/getmoremonsal111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmorebillings)$</from>
+		<to>/getmorebillings111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoreemps)$</from>
+		<to>/getmoreemps111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmoreseo)$</from>
+		<to>/getmoreseo111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmorenonseo)$</from>
+		<to>/getmorenonseo111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getmorenquiry)$</from>
+		<to>/getmorenquiry111</to>
+	</rule>
+
+	<rule>
+		<from>^/(getinvoiceno.html)$</from>
+		<to>/GetInvoiceNo111</to>
+	</rule>
+
+	<rule>
+		<from>^/(get-company.html)$</from>
+		<to>/GetCompany111</to>
+	</rule>
+
+	<rule>
+		<from>^/(manageaccount.html)$</from>
+		<to>/ManageAccount111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(employeeaccount.html)$</from>
+		<to>/EmployeeAccount111</to>
+	</rule>
+
+	<rule>
+		<from>^/(accountstatement.html)$</from>
+		<to>/AccountStatement111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(empaccountstatement.html)$</from>
+		<to>/EmpAccountStatement111</to>
+	</rule>
+
+	<rule>
+		<from>^/(addaccountstatement.html)$</from>
+		<to>/AddAccountStatement111</to>
+	</rule>
+
+	<rule>
+		<from>^/(projectfollowup.html)$</from>
+		<to>/ProjectFollowUp111</to>
+	</rule>
+
+    <rule>
+		<from>^/(managereport.html)$</from>
+		<to>/ManageReport111</to>
+	</rule>
+
+    <rule>
+		<from>^/(manageexpenses.html)$</from>
+		<to>/ManageExpense111?uid=$1</to>
+	</rule>
+
+    <rule>
+		<from>^/(managecredit.html)$</from>
+		<to>/ManageCreditHistory111?uid=$1</to>
+	</rule>
+	
+	<rule>
+		<from>^/(manageinvoice.html)$</from>
+		<to>/ManageInvoice111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/(agedreceivablesinvoice.html)$</from>
+		<to>/AgedReceivables111</to>
+	</rule>
+
+	<rule>
+		<from>^/(agedreceivablesbills.html)$</from>
+		<to>/AgedReceivableBills111</to>
+	</rule>
+
+	<rule>
+		<from>^/(salesgsttax.html)$</from>
+		<to>/SalesGstTax111</to>
+	</rule>
+	
+	<rule>
+		<from>^/(profitandloss.html)$</from>
+		<to>/ProfitAndLoss111</to>
+	</rule>
+
+ <rule>
+		<from>^/(cashflow.html)$</from>
+		<to>/CashFlow111</to>
+	</rule>
+
+  <rule>
+		<from>^/(balancesheet.html)$</from>
+		<to>/BalanceSheet111</to>
+	</rule>
+
+	<rule>
+		<from>^/(accountbalance.html)$</from>
+		<to>/AccountBalance111</to>
+	</rule>
+
+   <rule>
+		<from>^/(calendar.html)$</from>
+		<to>/ManageCalendar111?uid=$1</to>
+	</rule>
+
+   <rule>
+		<from>^/(certificates-renewal.html)$</from>
+		<to>/CertificatesRenewal111?uid=$1</to>
+	</rule>
+
+   <rule>
+		<from>^/(report.html)$</from>
+		<to>/Report111?uid=$1</to>
+	</rule>
+
+<!-- 	<rule> -->
+<!-- 		<from>^/uploaddocuments-(.*).html$</from> -->
+<!-- 		<to>/UploadDocuments111?type=$1</to> -->
+<!-- 	</rule> -->
+
+<!-- 	<rule> -->
+<!-- 		<from>^/uploadeddocuments.html$</from> -->
+<!-- 		<to>/UploadedDocuments111</to> -->
+<!-- 	</rule> -->
+
+	<rule>
+		<from>^/projectnewfollowup.html$</from>
+		<to>/ProjectNewFollowUp111</to>
+	</rule>
+
+	<rule>
+		<from>^/uploadclientdocuments.html$</from>
+		<to>/UploadClientDocuments111</to>
+	</rule>
+
+	<rule>
+		<from>^/uploadedclientdocuments.html$</from>
+		<to>/UploadedClientDocuments111</to>
+	</rule>
+	<rule>
+		<from>^/holidayscalendar.html$</from>
+		<to>/HolidaysCalendar111</to>
+	</rule>
+	<rule>
+		<from>^/workscheduler.html$</from>
+		<to>/WorkScheduler111</to>
+	</rule>
+
+	<rule>
+		<from>^/saveworkschedule.html$</from>
+		<to>/SaveWorkScheduler111</to>
+	</rule>
+
+	<rule>
+		<from>^/workschedulerfollowup-(.*).html$</from>
+		<to>/ViewFollowUpWorkScheduler111?uid=$1</to>
+	</rule>
+
+	<rule>
+		<from>^/saveworkschedulerfollowup.html$</from>
+		<to>/SaveWorkSchedulerFollowUp111</to>
+	</rule>
+
+	<rule>
+		<from>^/updateyear.html$</from>
+		<to>/UpdateYear111</to>
+	</rule>
+
+	<rule>
+		<from>^/errorupdateyear.html$</from>
+		<to>/ErrorUpdateYear111</to>
+	</rule>
+
+	<rule>
+		<from>^/yearupdateyes.html$</from>
+		<to>/UpdateYearYes111</to>
+	</rule>
+
+	<rule>
+		<from>^/seo-url-collection.html$</from>
+		<to>/SEOUrlCollection111</to>
+	</rule>
+
+	<rule>
+		<from>^/logintraffic.html$</from>
+		<to>/LoginTrafficCTRL111</to>
+	</rule>
+
+<!-- client login ure-rewrite -->
+
+<rule>
+<from>^/(client_dashboard.html)$</from>
+<to>/Dashboard999?uid=$1</to>
+</rule>
+
+<rule>
+<from>^/(permission.html)$</from>
+<to>/Permission999?uid=$1</to>
+</rule>
+
+<rule>
+<from>^/(client_inbox.html)$</from>
+<to>/Inbox999?uid=$1</to>
+</rule> 
+
+<rule>
+<from>^/(client_orders.html)$</from>
+<to>/Orders999?uid=$1</to>
+</rule>
+
+<rule>
+<from>^/(client_payments.html)$</from>
+<to>/Payments999?uid=$1</to>
+</rule>
+
+<rule>
+<from>^/(client_documents.html)$</from>
+<to>/Documents999?uid=$1</to>
+</rule>
+
+<rule>
+<from>^/(ManageClientOrderCTRL.html)$</from>
+<to>/ManageClientOrderCTRL999</to>
+</rule>
+
+<rule>
+<from>^/(paybillingamount.html)$</from>
+<to>/PaymentBillCTRL999</to>
+</rule>
+
+<rule>
+<from>^/(downloadClientDocument.html)$</from>
+<to>/DownloadClientDocument999</to>
+</rule>
+
+<rule>
+<from>^/(ManageClientDocumentCTRL.html)$</from>
+<to>/ManageClientDocumentCTRL999</to>
+</rule>
+
+<rule>
+<from>^/(client_error_page.html)$</from>
+<to>/ClientErrorPage999</to>
+</rule>
+
+<rule>
+<from>^/(ManageClientInboxCTRL.html)$</from>
+<to>/ManageClientInboxCTRL999</to>
+</rule>
+
+<rule>
+<from>^/(ClientChatReply.html)$</from>
+<to>/ClientChatReply999</to>
+</rule>
+
+<rule>
+<from>^/(addclientDocument.html)$</from>
+<to>/AddClientDocument999</to>
+</rule>
+
+<rule>
+<from>^/(my_profile.html)$</from>
+<to>/MyProfile999?uid=$1</to>
+</rule>
+
+<!-- Autocomplete -->
+<rule>
+<from>^/(getprojectdetails.html)$</from>
+<to>/GetProjectDetails999</to>
+</rule>
+
+<rule>
+<from>^/(getCompanyDetails.html)$</from>
+<to>/GetCompanyDetails999</to>
+</rule>
+
+<rule>
+<from>^/(getdocumentdetails.html)$</from>
+<to>/GetDocumentDetails999</to>
+</rule>
+
+<rule>
+<from>^/(payment.html)$</from>
+<to>/Payment999</to>
+</rule>
+
+<rule>
+<from>^/(payment-invoice.html)$</from>
+<to>/PaymentInvoice999</to>
+</rule>
+
+<rule>
+<from>^/(update-coupon.html)$</from>
+<to>/UpdateCoupon111</to>
+</rule>
+
+<rule>
+<from>^/(addupdatecoupon.html)$</from>
+<to>/AddUpdateCoupon111</to>
+</rule>
+
+<rule>
+<from>^/(delete-coupon.html)$</from>
+<to>/DeleteCoupon111</to>
+</rule>
+
+<rule>
+<from>^/(addonlineorder.html)$</from>
+<to>/AddOnlineOrder111</to>
+</rule>
+
+<rule>
+<from>^/(managecoupon.html)$</from>
+<to>/ManageCoupon111?uid=$1</to>
+</rule>
+
+<rule>
+<from>^/(addcoupon.html)$</from>
+<to>/AddCoupon111</to>
+</rule>
+
+<rule>
+<from>^/(updatecoupon.html)$</from>
+<to>/UpdateAdminCoupon111</to>
+</rule>
+
+<rule>
+<from>^/(403.html)$</from>
+<to>/Error403111</to>
+</rule>
+
+<rule>
+<from>^/(404.html)$</from>
+<to>/Error404111</to>
+</rule>
+
+<rule>
+<from>^/(500.html)$</from>
+<to>/Error500111</to>
+</rule>
+
+</urlrewrite>

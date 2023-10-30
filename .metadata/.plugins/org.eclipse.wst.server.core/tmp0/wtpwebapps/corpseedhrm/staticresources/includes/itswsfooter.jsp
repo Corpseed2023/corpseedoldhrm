@@ -1,0 +1,4 @@
+<div id="footer"><div class="footer"><div class="container"><div class="footer-bottom"><div class="row"><div class="col-md-12 col-sm-12 col-xs-12"><div class="copyright">Copyright &copy; 2021 Corpseed ITES Pvt Ltd All Rights Reserved.</div></div></div></div></div></div></div>
+<div class="alert-show"><div class="alert-bg alert-striped" id="errorMsg" style="font-size: 17px;width: 100%;height: 100%;"></div></div>
+<div class="alert-show1"><div class="alert-bg1 alert-striped" id="errorMsg1" style="font-size: 17px;width: 100%;height: 100%;"></div></div>
+ <div class="processing_loader" style="display:none"><div class="spin_box"></div></div> 
