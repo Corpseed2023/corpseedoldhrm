@@ -1,10 +1,8 @@
 package admin.export;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,9 +25,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.azure.storage.blob.BlobClientBuilder;
-
-import commons.AzureBlob;
+import admin.master.CloudService;
 import commons.CommonHelper;
 import commons.DateUtil;
 import commons.DbCon;
@@ -37,8 +33,7 @@ import commons.DbCon;
 public class ExportData {
 	private static Logger log = Logger.getLogger(ExportData.class);
 	
-    public String export(String table,String sql,String basePath,String token,String formate,
-    		String azure_key,String azure_container) {
+    public String export(String table,String sql,String basePath,String token,String formate) {
         String status="";
         String excelFilePath = getFileName(table.concat("_Export"),formate);
         Connection connection =null;
@@ -131,17 +126,8 @@ public class ExportData {
 			}
             
             
-            
-            BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-	        client.connectionString(azure_key);
-	        client.containerName(azure_container);
 	        File path = new File(basePath+"/"+excelFilePath);
-//	        System.out.println("export file name==="+excelFilePath);
-	        InputStream targetStream = new FileInputStream(path);
-	        client.blobName(excelFilePath).buildClient().upload(targetStream,path.length());
-//			System.out.println("export file name==="+excelFilePath);
-			targetStream.close();
-            
+	        CloudService.uploadDocument(path, excelFilePath);            
             
             status=excelFilePath;
             }else {

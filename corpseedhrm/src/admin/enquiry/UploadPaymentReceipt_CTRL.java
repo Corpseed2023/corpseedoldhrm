@@ -1,9 +1,7 @@
 package admin.enquiry;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -15,11 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
 
 import admin.Login.LoginAction;
-import commons.AzureBlob;
 import commons.DateUtil;
 
 @SuppressWarnings("serial")
@@ -39,8 +35,7 @@ try{
 		Properties properties = new Properties();
 		properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 		String docpath=properties.getProperty("path")+"documents";
-		String azure_key=properties.getProperty("azure_key");
-		String azure_container=properties.getProperty("azure_container");
+
 		
 		MultipartRequest m=new MultipartRequest(request,docpath,1024*1024*50);
 		File file=m.getFile("payfile");
@@ -54,13 +49,13 @@ try{
 		File newFile = new File(docpath+imgname);
 		file.renameTo(newFile);
 		
-		BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-        client.connectionString(azure_key);
-        client.containerName(azure_container);
-        InputStream targetStream = new FileInputStream(newFile);
-        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
 		
-		targetStream.close();
+        
+        
+        
+        
+		
+		
 		newFile.delete();
 		}
 		//inserting record into salesestimatepayment table

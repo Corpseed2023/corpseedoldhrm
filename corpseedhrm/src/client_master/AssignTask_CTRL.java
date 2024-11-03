@@ -1,9 +1,7 @@
 package client_master;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,10 +16,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
 
 import admin.Login.LoginAction;
+import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import admin.seo.SeoOnPage_ACT;
 import admin.task.TaskMaster_ACT;
@@ -45,8 +43,7 @@ try{
 		Properties properties = new Properties();
 		properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 		String docpath=properties.getProperty("path")+"documents";
-		String azure_key=properties.getProperty("azure_key");
-		String azure_container=properties.getProperty("azure_container");
+		String docBasePath=properties.getProperty("docBasePath");
 		
 		String imgname="NA";
 		String fpath="NA";
@@ -64,15 +61,9 @@ try{
 		imgname=key+"_"+imgname;
 		File newFile = new File(docpath+imgname);
 		file.renameTo(newFile);
-		fpath="https://corpseednew.blob.core.windows.net/"+azure_container+File.separator+imgname;
+		fpath=docBasePath+imgname;
 		
-		BlobClientBuilder client = new BlobClientBuilder();
-        client.connectionString(azure_key);
-        client.containerName(azure_container);
-        InputStream targetStream = new FileInputStream(newFile);
-        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
-		
-		targetStream.close();
+		CloudService.uploadDocument(newFile, imgname);
 		newFile.delete();
 		
 		}

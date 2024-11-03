@@ -42,7 +42,7 @@ public class ShareDocumentToClient_CTRL extends HttpServlet {
 			
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));
-			String azure_path=properties.getProperty("azure_path");
+			String docBasePath=properties.getProperty("docBasePath");
 			
 			String message="<table border=\"0\" style=\"margin:0 auto; min-width:700px;font-size:20px;line-height: 20px;border-spacing: 0;font-family: sans-serif;\">\r\n"
 					+ "        <tbody><tr><td style=\"text-align: left ;background-color: #fff; padding: 15px 0; width: 50px\">\r\n"
@@ -58,7 +58,7 @@ public class ShareDocumentToClient_CTRL extends HttpServlet {
 					+ "            Hi "+name+",</td></tr>"
 					+ "             <tr>"
 					+ "                    <td style=\"padding: 10px 0;color: #353637;\"> \r\n"
-					+ "                     <p>"+document[0]+" is shared with you, You can download the file by clicking on <a href=\""+azure_path+""+document[2]+"\" download=\"download\">download</a> button.</p>\r\n"
+					+ "                     <p>"+document[0]+" is shared with you, You can download the file by clicking on <a href=\""+docBasePath+""+document[2]+"\" download=\"download\">download</a> button.</p>\r\n"
 					+ "                     <p>Note : </b>This is an auto generated email. Do not reply on this email.\r\n"
 					+ "                     </p>\r\n"
 					+ "                    </td></tr>  \r\n"

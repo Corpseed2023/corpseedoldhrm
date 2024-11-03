@@ -1,8 +1,6 @@
 <!doctype html>
 <%@page import="commons.CommonHelper"%>
 <%@page import="java.util.Random"%>
-<%@page import="commons.AzureBlob"%>
-<%@page import="com.azure.storage.blob.BlobClientBuilder"%>
 <%@page import="admin.enquiry.Enquiry_ACT"%>
 <%@page import="admin.task.TaskMaster_ACT"%>
 <%@page import="java.nio.file.Files"%>
@@ -27,11 +25,8 @@ String x=request.getParameter("uid");
 salesrefid=x.substring(17,x.length()-5);
 
 Properties properties = new Properties();
-properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-String azure_key=properties.getProperty("azure_key");
-String azure_container=properties.getProperty("azure_container");
-String azure_path=properties.getProperty("azure_path");
-// BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
+properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));
+String docBasePath=properties.getProperty("docBasePath");
 String token=(String)session.getAttribute("uavalidtokenno");
 
 String productKey=TaskMaster_ACT.getSalesProductKey(salesrefid, token);
@@ -135,10 +130,10 @@ long randomInt = randomGenerator.nextInt(100000000);
  			String size="";
  			Path path=null;
  			if(fileName!=null&&!fileName.equalsIgnoreCase("NA")&&fileName.length()>0&&fileName.contains(".")){
- 				fileExist=CommonHelper.isFileExists(fileName, azure_key, azure_container);
+ 				fileExist=CommonHelper.isFileExists(fileName);
  				long bytes=0;
  				if(fileExist){
- 					bytes=CommonHelper.getBlobSize(fileName, azure_key, azure_container);
+ 					bytes=CommonHelper.getBlobSize(fileName);
  				}
  				long kb=bytes/1024;
  				long mb=kb/1024;	
@@ -161,14 +156,14 @@ long randomInt = randomGenerator.nextInt(100000000);
             <td class="doc_act_mobile">
             <form onsubmit="return false" class="uploadFileClass<%=i %>">	
 			<%if(DocOf.equalsIgnoreCase("Client")){if(fileExist){ %>
-			<a href="<%=azure_path%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a><%} %> 
+			<a href="<%=docBasePath%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a><%} %> 
 			<input type="file" name="uploadFileBox<%=i %>" onchange="fileSizeCompaitable('<%=files[i][0] %>','<%=i %>')" id="UploadFileBox<%=i %>" style="display: none;">	
 			<a href="javascript:void(0)" onclick="$('#UploadFileBox<%=i %>').click()"><i class="fas fa-file-upload" aria-hidden="true" title="Upload file"></i>&nbsp;Upload</a> 
 			<%}else if(DocOf.equalsIgnoreCase("Agent")&&fileExist){
 				String milestoneName=TaskMaster_ACT.getMileStoneName(files[i][7],token);
 				double percentage=TaskMaster_ACT.getProductWorkPercentage(productKey,milestoneName,token);
 				if(percentage<=payPercent){%>
-				<a href="<%=azure_path%><%=files[i][3]%>" download="download"><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
+				<a href="<%=docBasePath%><%=files[i][3]%>" download="download"><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
 				<%}else{%>
 					<a href="javascript:void(0)" onclick="showPartialPayment('<%=invoice%>','<%=dueAmount%>')"><i class="fas fa-file-download text-muted" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
 				<%}				
@@ -179,9 +174,9 @@ long randomInt = randomGenerator.nextInt(100000000);
             <%-- <td class="doc_act_mobile">
             <%if(doActionDocuments.equalsIgnoreCase("Personal")){
             	if(DocOf.equals("Agent")&&payType.equals("Partial Pay")&&dueAmount>0){%>
-            	<a <%if(Double.parseDouble(files[i][6])<=50&&fileExist){ %>href="<%=azure_path%><%=files[i][3]%>" download<%}else{ %>href="#"<%} %>><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
+            	<a <%if(Double.parseDouble(files[i][6])<=50&&fileExist){ %>href="<%=docBasePath%><%=files[i][3]%>" download<%}else{ %>href="#"<%} %>><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
 				<%}else{ %>
-				<a href="<%=azure_path%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i></a>
+				<a href="<%=docBasePath%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i></a>
 				<%} %>
 				<a onclick="deletePersonalFile('<%=files[i][0] %>','<%=files[i][3]%>')"><i class="fas fa-trash" aria-hidden="true" title="Delete file"></i></a> 
             <%}else{ %>
@@ -194,13 +189,13 @@ long randomInt = randomGenerator.nextInt(100000000);
 					String milestoneName=TaskMaster_ACT.getMileStoneName(files[i][7],token);
 					double percentage=TaskMaster_ACT.getProductWorkPercentage(productKey,milestoneName,token);
 					if(percentage<=payPercent){%>
-					<a href="<%=azure_path%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
+					<a href="<%=docBasePath%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
 					<%}else{%>
 						<a href="javascript:void(0)" onclick="showPartialPayment('<%=invoice%>','<%=dueAmount%>')"><i class="fas fa-file-download text-muted" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
 					<%}
 				}else{
 					if(Double.parseDouble(files[i][6])<=payPercent){%>
-						<a href="<%=azure_path%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
+						<a href="<%=docBasePath%><%=files[i][3]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
 					<%}else{%>
 						<a href="javascript:void(0)" onclick="showPartialPayment('<%=invoice%>','<%=dueAmount%>')"><i class="fas fa-file-download text-muted" aria-hidden="true" title="Download file"></i>&nbsp;Download</a>
 					<%}

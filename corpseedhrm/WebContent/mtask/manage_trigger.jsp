@@ -41,7 +41,7 @@
 	Properties properties = new Properties();
 	properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 	String domain=properties.getProperty("domain");
-	String azure_path=properties.getProperty("azure_path");
+	String docBasePath=properties.getProperty("docBasePath");
 	String sort_url=domain+"managetrigger.html?page="+pageNo+"&rows="+rows;
 
 	String triggers[][]=TaskMaster_ACT.getAllTriggers(token,TriggerNameDoAction,TriggerNoDoAction,TriggerdateRangeDoAction,pageNo,rows,sort,order);
@@ -1953,7 +1953,7 @@ function validateExport(){
 		$("#Protected").val("2")
 		$("#FilePassword").val("NA");
 	}
-	var baseName="<%=azure_path%>";
+	var baseName="<%=docBasePath%>";
 	columns+="";
 	showLoader();
 	$.ajax({

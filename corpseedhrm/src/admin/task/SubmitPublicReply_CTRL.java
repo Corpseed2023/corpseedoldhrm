@@ -1,9 +1,7 @@
 package admin.task;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,14 +18,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
 
 import admin.enquiry.Enquiry_ACT;
 import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import client_master.Clientmaster_ACT;
-import commons.AzureBlob;
 import commons.CommonHelper;
 import commons.DateUtil;
 import hcustbackend.ClientACT;
@@ -57,10 +53,8 @@ public class SubmitPublicReply_CTRL extends HttpServlet {
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String docpath=properties.getProperty("path")+"documents";
-			String docBasePath=properties.getProperty("docBasePath");
-
 			String domain=properties.getProperty("domain");
-			String azure_container=properties.getProperty("azure_container");
+			String docBasePath=properties.getProperty("docBasePath");
 			
 		MultipartRequest m=new MultipartRequest(request,docpath,1024*1024*50);		
 					
@@ -425,7 +419,7 @@ public class SubmitPublicReply_CTRL extends HttpServlet {
 								String contactName=x[0];
 								String contactEmail=x[1];
 								//going to send email
-//								String content="Hey, "+contactName+"<br>You haven replied on our team, Please <a href='https://corpseed-crm.azurewebsites.net/client_inbox.html'>login here</a> and send your valuable reply.";
+//								String content="Hey, "+contactName+"<br>You haven replied on our team, Please <a href='#'>login here</a> and send your valuable reply.";
 //								boolean sendEmail =Enquiry_ACT.saveEmail(contactEmail,"empty","Corpseed follow-up notification", content,2,token);
 								String abc="#FCE9EF";
 								String ac="#CB6C8C";
@@ -494,7 +488,7 @@ public class SubmitPublicReply_CTRL extends HttpServlet {
 			if(!imgname.equals("NA")) {
 				docname=imgname.substring(imgname.indexOf("_")+1);
 			}
-			if(flag)pw.write("pass#"+azure_path+imgname+"#"+size+"#"+extension+"#"+docname+"#"+key);
+			if(flag)pw.write("pass#"+docBasePath+imgname+"#"+size+"#"+extension+"#"+docname+"#"+key);
 			else pw.write("fail");
 		}catch(Exception e) {
 			e.printStackTrace();

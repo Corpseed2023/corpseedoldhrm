@@ -15,9 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
 
+import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import client_master.Clientmaster_ACT;
 import commons.DateUtil;
@@ -34,8 +34,7 @@ public class TaskStatus_CTRL extends HttpServlet {
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String docpath=properties.getProperty("path")+"documents";
-			String azure_key=properties.getProperty("azure_key");
-			String azure_container=properties.getProperty("azure_container");
+			String docBasePath=properties.getProperty("docBasePath");
 			String imgname="NA";
 			String fpath="NA";
 			String today=DateUtil.getCurrentDateIndianFormat1();
@@ -50,15 +49,8 @@ public class TaskStatus_CTRL extends HttpServlet {
 			imgname=key+"_"+imgname;
 			File newFile = new File(docpath+imgname);
 			file.renameTo(newFile);
-			fpath="https://corpseednew.blob.core.windows.net/"+azure_container+File.separator+imgname;
-			
-			BlobClientBuilder client = new BlobClientBuilder();
-	        client.connectionString(azure_key);
-	        client.containerName(azure_container);
-	        InputStream targetStream = new FileInputStream(newFile);
-	        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
-			
-			targetStream.close();
+			fpath=docBasePath + imgname;
+			CloudService.uploadDocument(newFile, imgname);
 			newFile.delete();
 			}
 			HttpSession session = request.getSession();

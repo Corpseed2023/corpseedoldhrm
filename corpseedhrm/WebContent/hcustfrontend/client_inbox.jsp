@@ -32,7 +32,7 @@ margin-bottom: 0px !important;}
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));
 String domain=properties.getProperty("domain");
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 
 String doAction=(String)session.getAttribute("ClientInboxDoAction");
 if(doAction==null||doAction.length()<=0)doAction="All";
@@ -542,7 +542,7 @@ function applyComment(uaid,uaname,listId){
 			var extension=x[2];
 			var fileName=x[3];
         		$("#ChatReplay").val("");
-        		var fileDownload="<%=azure_path%>"+fileName;
+        		var fileDownload="<%=docBasePath%>"+fileName;
         		if(fileName!=null&&fileName!="NA")fileName=fileName.substring(Number(fileName.indexOf("_"))+1);
         		var activeProject=$("#ActiveProjectNo").val();
         		var sendTo=$("#SelectedUserName").val();        		
@@ -550,7 +550,7 @@ function applyComment(uaid,uaname,listId){
         		$(".addNewChatFollowUp").trigger("reset");
         		
         <%-- 		if(fileName!=null&&fileName!=""&&fileName!="NA"){
-        			var fileDownload="<%=azure_path%>"+fileName;
+        			var fileDownload="<%=docBasePath%>"+fileName;
         			fileName=fileName.substring(21);
 					$(''+
 				             '<div class="clearfix pro_box text-right mb-3 RefreshDiv">'+
@@ -710,7 +710,7 @@ function setFollowUpId(fKey,formStatusId){
 					   var size =response[i]["size"];
 					   var unread =response[i]["unread"];
 					   var icon=addedbyName.substring(0,2);
-					   var fileDownload="<%=azure_path%>"+fileName;
+					   var fileDownload="<%=docBasePath%>"+fileName;
 					   var file=fileName.substring(21);
 					   
 					   var formFillId="formFillId"+i;
@@ -928,7 +928,7 @@ function loadMoreChat(){
 				   var size =response[i]["size"];
 				   var unread =response[i]["unread"];
 				   var icon=addedbyName.substring(0,2);
-				   var fileDownload="<%=azure_path%>"+fileName;
+				   var fileDownload="<%=docBasePath%>"+fileName;
 				   var file=fileName.substring(21);
 				   
 				   var formFillId="formFillId"+i;
@@ -1065,7 +1065,7 @@ function loadMoreChat(){
 						 
 						 var fileDownload="#";
 						 if(DocName!="NA"&&DocName!=null)
-						 	fileDownload="<%=azure_path%>"+DocName;
+						 	fileDownload="<%=docBasePath%>"+DocName;
 						 
 						 var displayFile="";
 						 
@@ -1129,7 +1129,7 @@ function loadMoreChat(){
 	        	var x=data.split("#")
 	        	if(x[0]=="pass"){
 	        	document.getElementById('errorMsg1').innerHTML ="Uploaded Successfully !!";
-	        	var href="<%=azure_path%>"+x[1];
+	        	var href="<%=docBasePath%>"+x[1];
 	        	$("#"+IconId).attr("href",href);
 	        	$("#"+IconId).show();	        	
 	    		$('.alert-show1').show().delay(3000).fadeOut();

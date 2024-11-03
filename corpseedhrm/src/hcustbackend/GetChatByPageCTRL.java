@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.azure.storage.blob.BlobClientBuilder;
-
-import commons.AzureBlob;
+import commons.CommonHelper;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -37,10 +35,8 @@ public class GetChatByPageCTRL extends HttpServlet {
 				String chat[][]=ClientACT.getChat(salesKey,clientKey,pageNumber,token);
 				if(chat!=null&&chat.length>0) {	
 					Properties properties = new Properties();
-					properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-					String azure_key=properties.getProperty("azure_key");
-					String azure_container=properties.getProperty("azure_container");
-					BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
+					properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));
+					
 					for(int i=0;i<chat.length;i++) {
 						json.put("key",chat[i][0]);		
 						json.put("milestoneKey",chat[i][1]);
@@ -62,10 +58,10 @@ public class GetChatByPageCTRL extends HttpServlet {
 						String size="";
 						if(fileName!=null&&!fileName.equalsIgnoreCase("NA")&&fileName.length()>0){
 						
-					boolean fileExist=client.blobName(fileName).buildClient().exists();
+					boolean fileExist=CommonHelper.isFileExists(fileName);
 					long bytes=0;
 					if(fileExist){
-						bytes=client.blobName(fileName).buildClient().getProperties().getBlobSize();
+						bytes=CommonHelper.getBlobSize(fileName);
 					}			
 					long kb=bytes/1024;
 					long mb=kb/1024;	

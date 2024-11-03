@@ -30,7 +30,7 @@ String today=DateUtil.getCurrentDateIndianFormat1();
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String domain=properties.getProperty("domain");
-String azurePath=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 
 // new start  
 String estDoAction=(String)session.getAttribute("estDoAction");
@@ -1804,7 +1804,7 @@ to sharing information about customers and suppliers.</p>
   <input type="hidden" id="ConvertEstimateStatus">
   
  <div class="noDisplay"><a href="" id="DownloadExportedLink" download><button id="DownloadExported">Download</button></a></div> 
- <div class="noDisplay"><a href="<%=azurePath %>invoices.pdf" download><button id="DownloadExportedInvoices">Download</button></a></div>
+ <div class="noDisplay"><a href="<%=docBasePath %>invoices.pdf" download><button id="DownloadExportedInvoices">Download</button></a></div>
 <%@ include file="../staticresources/includes/itswsfooter.jsp" %>
 
 </div>	

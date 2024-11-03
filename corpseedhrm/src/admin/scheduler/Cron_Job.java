@@ -205,7 +205,7 @@ public class Cron_Job extends TimerTask {
 					String contactName=x[0];
 					String contactEmail=x[1];
 					//going to send email
-//					String content="Hey, "+contactName+"<br>You haven replied on our team, Please <a href='https://corpseed-crm.azurewebsites.net/client_inbox.html'>login here</a> and send your valuable reply.";
+//					String content="Hey, "+contactName+"<br>You haven replied on our team, Please <a href='#'>login here</a> and send your valuable reply.";
 //					boolean sendEmail =Enquiry_ACT.saveEmail(contactEmail,"empty","Corpseed follow-up notification", content,2,token);
 					String abc="#FCE9EF";
 					String ac="#CB6C8C";

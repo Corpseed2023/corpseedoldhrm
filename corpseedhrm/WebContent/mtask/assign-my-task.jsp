@@ -1,9 +1,6 @@
 <!DOCTYPE HTML>
 <%@page import="commons.CommonHelper"%>
 <%@page import="client_master.Clientmaster_ACT"%>
-<%@page import="commons.AzureBlob"%>
-<%@page import="com.azure.storage.blob.models.BlobProperties"%>
-<%@page import="com.azure.storage.blob.BlobClientBuilder"%>
 <%@page import="java.nio.file.Files"%>
 <%@page import="java.nio.file.Paths"%>
 <%@page import="java.util.Properties"%>
@@ -80,9 +77,6 @@ if(activityType==null||activityType.length()<=0)activityType="NA";
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String docpath=properties.getProperty("path")+"documents";
-/* String azure_key=properties.getProperty("azure_key");
-String azure_container=properties.getProperty("azure_container");
-String azure_path=properties.getProperty("azure_path"); */
 String docBasePath=properties.getProperty("docBasePath");
 
 String currentTime=DateUtil.getCurrentTime24Hours();

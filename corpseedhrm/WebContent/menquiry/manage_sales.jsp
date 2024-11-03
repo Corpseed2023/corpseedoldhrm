@@ -44,7 +44,7 @@ if(department==null)department="NA";
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String domain=properties.getProperty("domain");
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 //pagination start
 String filter="";
 String sortF=request.getParameter("sort");
@@ -1621,7 +1621,7 @@ Tax Details
 <input type="hidden" id="SalePriceWithoutGst" value="0"/>
 <input type="hidden" id="SaleGstAmount" value="0"/>
 <div class="noDisplay"><a href="" id="DownloadExportedLink" download><button id="DownloadExported">Download</button></a></div> 
- <div class="noDisplay"><a href="<%=azure_path %>invoices.pdf" download><button id="DownloadExportedInvoices">Download</button></a></div>
+ <div class="noDisplay"><a href="<%=docBasePath %>invoices.pdf" download><button id="DownloadExportedInvoices">Download</button></a></div>
 <%@ include file="../staticresources/includes/itswsscripts.jsp" %>
 <script type="text/javascript" src="<%=request.getContextPath()%>/staticresources/js/jspdf.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/staticresources/js/html2pdf.bundle.js"></script>
@@ -2780,7 +2780,7 @@ function showAllPayment(invoice){
 			var pstatus="Processing";
 			var color="#42b0da";
 			
-			var path="<%=azure_path%>";
+			var path="<%=docBasePath%>";
 			var path1="<%=domain%>";
 			var filecolor="#dc3333";
 			if(docname!="NA")filecolor="#42b7e4";
@@ -3115,7 +3115,7 @@ function fillDocumentList(salesrefid){
 					icon="fa fa-check-circle-o";
 					color="#29ba29;";
 				}
-				var home="<%=azure_path%>";
+				var home="<%=docBasePath%>";
 				var downloadDoc="";
 				if(uploaddoc!=null&&uploaddoc!="NA")
 					downloadDoc='<span><a style="font-size: 14px;color: #50b5dc;" href="'+home+''+uploaddoc+'" download><i class="fas fa-arrow-down pointers" title="Download"></i></a></span>';
@@ -3192,7 +3192,7 @@ function fillDocumentUploadHistory(salesrefid){
 				var action='<a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-arrow-down text-muted"></i></a>'+
 				'<a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-trash text-muted"></i></a>';
 				
-				var docLink="<%=azure_path%>"+docName;
+				var docLink="<%=docBasePath%>"+docName;
 				
 				if(Number(exist)==1 && role=="Admin"){
 					action='<a id="Download'+id+'" href="'+docLink+'" download><i class="fas fa-arrow-down"></i></a>'+
@@ -4113,7 +4113,7 @@ function validateExport(){
 		$("#Protected").val("2")
 		$("#FilePassword").val("NA");
 	}
-	var baseName="<%=azure_path%>";
+	var baseName="<%=docBasePath%>";
 	
 	    if (confirm("If you don't apply any filter then all records will be exported from start, Ok to Continue ?")) {
 	columns+="";

@@ -78,7 +78,7 @@ if(request.getParameter("sort")!=null)sort=request.getParameter("sort");
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String domain=properties.getProperty("domain");
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 String sort_url=domain+"document-collection.html?page="+pageNo+"&rows="+rows;
 
 String country[][]=TaskMaster_ACT.getAllCountries();
@@ -1335,7 +1335,7 @@ function validateExport(){
 		$("#Protected").val("2")
 		$("#FilePassword").val("NA");
 	}
-	var baseName="<%=azure_path%>";
+	var baseName="<%=docBasePath%>";
 	columns+="";
 	showLoader();
 	$.ajax({
@@ -2104,7 +2104,7 @@ function fillDocumentList(salesrefid){
 				}
 				var notiIcon="";
 				if(reupload=="1")notiIcon="<span class='small_notification'>&nbsp;</span>";
-				var home="<%=azure_path%>";
+				var home="<%=docBasePath%>";
 				var downloadDoc="";
 				if(uploaddoc!=null&&uploaddoc!="NA")
 					downloadDoc='<span><a style="font-size: 14px;color: #50b5dc;" href="'+home+''+uploaddoc+'" download><i class="fas fa-arrow-down pointers" title="Download"></i></a></span>';
@@ -2180,7 +2180,7 @@ function fillDocumentUploadHistory(salesrefid){
 				var action='<a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-arrow-down text-muted"></i></a>'+
 				'<a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-trash text-muted"></i></a>';
 				
-				var docLink="<%=azure_path%>"+docName;
+				var docLink="<%=docBasePath%>"+docName;
 				
 				if(Number(exist)==1 && role=="Admin"){
 					action='<a id="Download'+id+'" href="'+docLink+'" download><i class="fas fa-arrow-down"></i></a>'+

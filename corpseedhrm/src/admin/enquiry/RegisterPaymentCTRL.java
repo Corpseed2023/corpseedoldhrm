@@ -1,9 +1,7 @@
 package admin.enquiry;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Properties;
 
@@ -15,13 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-
 import com.oreilly.servlet.MultipartRequest;
 
 import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import admin.task.TaskMaster_ACT;
-import commons.AzureBlob;
 import commons.CommonHelper;
 import commons.DateUtil;
 

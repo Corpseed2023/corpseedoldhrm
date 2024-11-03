@@ -57,8 +57,6 @@ public class ExportData_CTRL extends HttpServlet {
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String path=properties.getProperty("path")+"exported";
-			String azure_key=properties.getProperty("azure_key");
-			String azure_container=properties.getProperty("azure_container");
 			
 //			System.out.println("path=="+path);
 			FileUtils.cleanDirectory(new File(path+File.separator)); 
@@ -283,8 +281,7 @@ public class ExportData_CTRL extends HttpServlet {
 			
 //			System.out.println(sql);
 			ExportData expData=new ExportData();
-			String export = expData.export(pageName, sql.toString(),path,token,formate,
-					azure_key,azure_container);
+			String export = expData.export(pageName, sql.toString(),path,token,formate);
 						
 			pw.write(export);
 			//inserting invoice download history

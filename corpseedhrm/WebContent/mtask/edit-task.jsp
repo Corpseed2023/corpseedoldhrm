@@ -3,9 +3,6 @@
 <%@page import="java.util.Properties"%>
 <%@page import="commons.DateUtil"%>
 <%@page import="client_master.Clientmaster_ACT"%>
-<%@page import="commons.AzureBlob"%>
-<%@page import="com.azure.storage.blob.BlobClientBuilder"%>
-<%@page import="com.azure.storage.blob.models.BlobProperties"%>
 <%@page import="org.docx4j.org.xhtmlrenderer.css.style.Length"%>
 <%@page import="admin.enquiry.Enquiry_ACT"%>
 <!DOCTYPE HTML>
@@ -134,9 +131,7 @@ String companyIndustry=Clientmaster_ACT.findCompanyIndustry(clientKey,token);
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String docpath=properties.getProperty("path")+"documents";
-String azure_key=properties.getProperty("azure_key");
-String azure_container=properties.getProperty("azure_container");
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 String domain=properties.getProperty("corpseed_domain");
 
 String currentTime=DateUtil.getCurrentTime24Hours();
@@ -1208,7 +1203,7 @@ if(doclist!=null&&doclist.length>0){
 	for(int i=0;i<doclist.length;i++){
 		boolean fileExist=false;
 		if(doclist[i][4]!=null&&!doclist[i][4].equalsIgnoreCase("NA"))
-			fileExist=CommonHelper.isFileExists(doclist[i][4],azure_key,azure_container);
+			fileExist=CommonHelper.isFileExists(doclist[i][4]);
 		
 // 		System.out.println(doclist[i][4]+"#"+fileExist);
 			
@@ -1229,7 +1224,7 @@ if(doclist!=null&&doclist.length>0){
        <div class="clearfix">
        <p class="news-border" style="font-size: 15px;">
 	   <%if(doclist[i][4]!=null&&doclist[i][4].length()>0&&!doclist[i][4].equalsIgnoreCase("NA")&&fileExist){ %>
-	   <a class="bg_none colorNone MainDownloadIcon<%=i %>" href="<%=azure_path%><%=doclist[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
+	   <a class="bg_none colorNone MainDownloadIcon<%=i %>" href="<%=docBasePath%><%=doclist[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
        <%}%>
       <span id="AppendDocDownload<%=i %>"></span>
        <span style="margin-right: 3px;">
@@ -1279,7 +1274,7 @@ if(doclist1!=null&&doclist1.length>0){
 	for(int i=0;i<doclist1.length;i++){
 		boolean fileExist=false;
 		if(doclist1[i][4]!=null&&!doclist1[i][4].equalsIgnoreCase("NA"))
-			fileExist=CommonHelper.isFileExists(doclist1[i][4],azure_key,azure_container);
+			fileExist=CommonHelper.isFileExists(doclist1[i][4]);
 %>
 <div class="clearfix bg_wht link-style12">
    <div class="col-xs-3 box-intro-background">
@@ -1297,7 +1292,7 @@ if(doclist1!=null&&doclist1.length>0){
        <div class="clearfix">
        <p class="news-border" style="font-size: 15px;">
 	   <%if(doclist1[i][4]!=null&&doclist1[i][4].length()>0&&!doclist1[i][4].equalsIgnoreCase("NA")&&fileExist){ %>
-	   <a class="bg_none colorNone MainDownloadIcon1<%=i %>" href="<%=azure_path%><%=doclist1[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
+	   <a class="bg_none colorNone MainDownloadIcon1<%=i %>" href="<%=docBasePath%><%=doclist1[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
        <%}%>
       <span id="AppendDocDownload1<%=i %>"></span>
        <span style="margin-right: 3px;">
@@ -1345,7 +1340,7 @@ if(docAction!=null&&docAction.length>0){
 	if(docAction[i][9]!=null&&docAction[i][9].length()>0&&!docAction[i][9].equalsIgnoreCase("NA"))existDoc=true;
 	boolean fileExist=false;
 		if(existDoc)
-			fileExist=CommonHelper.isFileExists(docAction[i][9], azure_key, azure_container);
+			fileExist=CommonHelper.isFileExists(docAction[i][9]);
 		
 %>
 <div class="clearfix bg_wht link-style12">
@@ -1362,7 +1357,7 @@ if(docAction!=null&&docAction.length>0){
    <div class="col-xs-1 box-intro-background">
       <div class="clearfix">
        <p class="news-border"><%if(userRole.equalsIgnoreCase("Admin")&&status){ %>
-       <a id="Download<%=docAction[i][0] %>" <%if(existDoc&&fileExist){%>href="<%=azure_path%><%=docAction[i][9] %>" download<%}else{ %>data-toggle="modal" data-target="#NoDocument"<%} %>><i class="fas fa-arrow-down <%if(!existDoc){%>text-muted<%}%>"></i></a>&nbsp;
+       <a id="Download<%=docAction[i][0] %>" <%if(existDoc&&fileExist){%>href="<%=docBasePath%><%=docAction[i][9] %>" download<%}else{ %>data-toggle="modal" data-target="#NoDocument"<%} %>><i class="fas fa-arrow-down <%if(!existDoc){%>text-muted<%}%>"></i></a>&nbsp;
        <a id="Delete<%=docAction[i][0] %>" <%if(existDoc&&fileExist){%>onclick="deleteDocument('<%=docAction[i][0] %>','<%=docAction[i][9] %>')"<%}else{ %>data-toggle="modal" data-target="#NoDocument"<%} %>><i class="fas fa-trash  <%if(!existDoc&&!fileExist){%>text-muted<%}else{%>text-danger<%}%>"></i></a><%}else{ %>
        <a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-arrow-down text-muted"></i></a>
        <a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-trash text-muted"></i></a>
@@ -1503,7 +1498,7 @@ for(int i=0;i<toolTip.length;i++){%>
 <div class="file-upload-box">
 <i class="far fa-file"></i>
 <span id="StepGuideFileName1"><%=toolTip[i][1].substring(21) %></span>
-<div class="action-btn"><a href="<%=azure_path%><%=toolTip[i][1] %>" download>
+<div class="action-btn"><a href="<%=docBasePath%><%=toolTip[i][1] %>" download>
 <i class="far fa-arrow-alt-circle-down"></i></a>		
 </div>
 </div>
@@ -1633,10 +1628,10 @@ if(followUp!=null&&followUp.length>0){
 		String size="";
 		Path path=null;
 		if(followUp[i][6]!=null&&!followUp[i][6].equalsIgnoreCase("NA")&&followUp[i][6].length()>0){
-			boolean fileExist=CommonHelper.isFileExists(fileName, azure_key, azure_container);
+			boolean fileExist=CommonHelper.isFileExists(fileName);
 			long bytes=0;
 			if(fileExist){
-				bytes=CommonHelper.getBlobSize(fileName,azure_key,azure_container);
+				bytes=CommonHelper.getBlobSize(fileName);
 			}
 			long kb=bytes/1024;
 			long mb=kb/1024;	
@@ -1662,7 +1657,7 @@ if(followUp!=null&&followUp.length>0){
 <%if(followUp[i][6]!=null&&!followUp[i][6].equalsIgnoreCase("NA")&&followUp[i][6].length()>0){%>
 <div class="clearfix download_file">
 <div class="download_box"><span><img src="<%=request.getContextPath() %>/staticresources/images/file.png" alt=""><span title="<%=followUp[i][6].substring(21) %>"><%=followUp[i][6].substring(21) %></span></span>
-<a href="<%=azure_path%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
+<a href="<%=docBasePath%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
 <div class="download_size"><span><%=size %>  <%=extension.toUpperCase()%></span><span><%=followUp[i][8] %></span></div>
 </div>
 <%} %>
@@ -1682,7 +1677,7 @@ if(followUp!=null&&followUp.length>0){
 <%if(followUp[i][6]!=null&&!followUp[i][6].equalsIgnoreCase("NA")&&followUp[i][6].length()>0){%>
 <div class="clearfix download_file">
 <div class="download_box"><span><img src="<%=request.getContextPath() %>/staticresources/images/file.png" alt=""><span title="<%=followUp[i][6].substring(21) %>"><%=followUp[i][6].substring(21) %></span></span>
-<a href="<%=azure_path%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
+<a href="<%=docBasePath%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
 <div class="download_size"><span><%=size %>  <%=extension.toUpperCase()%></span><span><%=followUp[i][8] %></span></div>
 </div>
 <%} %>
@@ -2607,7 +2602,7 @@ function uploadFile1(uploadbox,MainDownloadIcon,AppendDocDownload,docKey,File,Do
 	        	if(x[0]=="pass"){
 	          	document.getElementById('errorMsg1').innerHTML ="Uploaded Successfully !!";
 	          	$("#"+DocumentListDateId).html(today);
-	          	var fileDownload="<%=azure_path%>"+x[1];
+	          	var fileDownload="<%=docBasePath%>"+x[1];
 	          	//change date and color
 	          	$("."+MainDownloadIcon).hide();
 	  			$(''+

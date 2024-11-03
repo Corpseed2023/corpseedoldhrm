@@ -1,5 +1,4 @@
 <%@page import="commons.DateUtil"%>
-<%@page import="com.azure.storage.blob.BlobClientBuilder"%>
 <%@page import="java.util.Properties"%>
 <%@page import="commons.CommonHelper"%>
 <%@page import="admin.enquiry.Enquiry_ACT"%>
@@ -21,7 +20,7 @@
 <%}
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 String domain=properties.getProperty("domain");
 //pagination start
 int pageNo=1;

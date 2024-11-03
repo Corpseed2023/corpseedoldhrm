@@ -1,9 +1,7 @@
 package admin.task;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Properties;
 
@@ -15,11 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
 
+import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
-import commons.AzureBlob;
 import commons.DateUtil;
 
 
@@ -39,8 +36,6 @@ public class UploadPersonalFiles_CTRL extends HttpServlet {
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String docpath=properties.getProperty("path")+"documents";
-			String azure_key=properties.getProperty("azure_key");
-			String azure_container=properties.getProperty("azure_container");
 		MultipartRequest m=new MultipartRequest(request,docpath,1024*1024*50);		
 		
 			
@@ -56,13 +51,7 @@ public class UploadPersonalFiles_CTRL extends HttpServlet {
 				File newFile = new File(docpath+"/"+imgname);
 				file.renameTo(newFile);
 								
-				BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-		        client.connectionString(azure_key);
-		        client.containerName(azure_container);
-		        InputStream targetStream = new FileInputStream(newFile);
-		        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
-				
-				targetStream.close();
+				CloudService.uploadDocument(newFile, imgname);
 				newFile.delete();
 				}
 //			System.out.println(imgname);

@@ -36,7 +36,7 @@ if(sortBy==null||sortBy.length()<=0)sortBy="desc";
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));
 String domain=properties.getProperty("domain");
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 
 long pageLimit=10;
 String pageLimit1=(String)session.getAttribute("paymentPageLimit");
@@ -543,7 +543,7 @@ function fillPaymentHistory(invoice){
 		response = JSON.parse(response);			
 		 var len = response.length;
 		 if(len>0){	
-			 var home="<%=azure_path%>";
+			 var home="<%=docBasePath%>";
 			 var path="<%=domain%>"; 		
 			 for(var i=0;i<len;i++){				 
 				 var prefid=response[i]["prefid"];

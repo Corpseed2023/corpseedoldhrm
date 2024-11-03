@@ -24,7 +24,6 @@ import com.itextpdf.html2pdf.HtmlConverter;
 
 import admin.master.CloudService;
 import admin.task.TaskMaster_ACT;
-import commons.AzureBlob;
 import commons.CommonHelper;
 import commons.DateUtil;
 

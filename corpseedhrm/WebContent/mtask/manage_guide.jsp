@@ -18,7 +18,7 @@
 	String token=(String)session.getAttribute("uavalidtokenno");
 	Properties properties = new Properties();
 	properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-	String azure_path=properties.getProperty("azure_path");
+	String docBasePath=properties.getProperty("docBasePath");
 	String domain=properties.getProperty("domain");
 	
 	String guideDateRangeAction=(String)session.getAttribute("guideDateRangeAction");
@@ -510,7 +510,7 @@ function showAllStepGuide(jurisdiction){
 			response = JSON.parse(response);			
 			 var len = response.length;	
 			 $(".removeStepGuide").remove();
-			 var path="<%=azure_path%>";			 
+			 var path="<%=docBasePath%>";			 
 			for(var i=0;i<len;i++){
 				var key = response[i]['key'];
 				var stepno = response[i]['stepno'];
@@ -548,7 +548,7 @@ function showAllStepGuide(jurisdiction){
 					}else{
 						uploadFile="";
 					}
-					var downloadFile="<%=azure_path%>"+document;
+					var downloadFile="<%=docBasePath%>"+document;
 					$(''+
 					'<div class="inner_step removeStepGuide" id="StepGuideCount'+stepno+'">'+
 					'<a class="step_list active remove" onclick="openStepBox(\''+stepno+'\')" id="StepClassActive'+stepno+'">Step '+stepName+'</a>'+
@@ -1146,7 +1146,7 @@ function validateExport(){
 		$("#Protected").val("2")
 		$("#FilePassword").val("NA");
 	}
-	var baseName="<%=azure_path%>";
+	var baseName="<%=docBasePath%>";
 	columns+="";
 	showLoader();
 	$.ajax({

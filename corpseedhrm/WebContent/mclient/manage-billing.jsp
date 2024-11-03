@@ -1,5 +1,4 @@
 <%@page import="commons.DateUtil"%>
-<%@page import="com.azure.storage.blob.BlobClientBuilder"%>
 <%@page import="java.util.Properties"%>
 <%@page import="commons.CommonHelper"%>
 <%@page import="admin.enquiry.Enquiry_ACT"%>
@@ -20,7 +19,7 @@
 	<%
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 String domain=properties.getProperty("domain");
 	
 String addedby= (String)session.getAttribute("loginuID");
@@ -1328,7 +1327,7 @@ function fillPaymentDetails(invoiceno,rowid,clientrefid,contactrefid){
 		response = JSON.parse(response);			
 		 var len = response.length;		 
 		 if(len>0){
-			 var path="<%=azure_path%>";
+			 var path="<%=docBasePath%>";
 			 var billingDoAction="<%=billingDoAction%>";
 			 for(var i=0;i<Number(len);i++){
 		 	var refid=response[i]["refid"];
@@ -1923,7 +1922,7 @@ function fillPaymentHistory(invoice){
 		response = JSON.parse(response);			
 		 var len = response.length;		 
 		 if(len>0){	
-			 var home="<%=azure_path%>";
+			 var home="<%=docBasePath%>";
 			 for(var i=0;i<len;i++){
 				 var prefid=response[i]["prefid"];
 					var date=response[i]["date"];
@@ -2262,7 +2261,7 @@ function validateExport(){
 		$("#Protected").val("2")
 		$("#FilePassword").val("NA");
 	}
-	var baseName="<%=azure_path%>";
+	var baseName="<%=docBasePath%>";
 	columns+="";
 	showLoader();
 	$.ajax({

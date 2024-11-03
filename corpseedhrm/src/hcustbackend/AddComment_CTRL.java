@@ -1,9 +1,7 @@
 package hcustbackend;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,12 +16,12 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
+
 import admin.enquiry.Enquiry_ACT;
+import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import admin.task.TaskMaster_ACT;
-import commons.AzureBlob;
 import commons.CommonHelper;
 import commons.DateUtil;
 
@@ -52,9 +50,7 @@ public class AddComment_CTRL extends HttpServlet {
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String docpath=properties.getProperty("path")+"documents";
-			String azure_key=properties.getProperty("azure_key");
 			String domain=properties.getProperty("domain");
-			String azure_container=properties.getProperty("azure_container");
 			
 			MultipartRequest m=new MultipartRequest(request,docpath,1024*1024*50);		
 			String salesKey=m.getParameter("projectSalesKey").trim();
@@ -75,11 +71,7 @@ public class AddComment_CTRL extends HttpServlet {
 				File newFile = new File(docpath+"/"+imgname);
 				file.renameTo(newFile);
 				
-				BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-		        client.connectionString(azure_key);
-		        client.containerName(azure_container);
-		        InputStream targetStream = new FileInputStream(newFile);
-		        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
+				CloudService.uploadDocument(newFile, imgname);
 				
 				//getting file size and extension
 				path = Paths.get(docpath+"/"+imgname);

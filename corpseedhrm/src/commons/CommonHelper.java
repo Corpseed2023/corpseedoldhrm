@@ -265,36 +265,12 @@ public class CommonHelper {
 		return time;
 	}
 	
-//	public static long getBlobSize(String fileName,String azure_key,String azure_container) {
-//		try {
-//		BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-//		return client.blobName(fileName).buildClient().getProperties().getBlobSize();
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//			return 0;
-//		}
-//	}
-	
 	public static long getBlobSize(String fileName) {
 		return 1024;
 	}
-	
-	/*
-	 * public static boolean isFileExists(String fileName,String azure_key,String
-	 * azure_container) { try { BlobClientBuilder
-	 * client=AzureBlob.getBlobClient(azure_key, azure_container); return
-	 * client.blobName(fileName).buildClient().exists(); } catch (Exception e) {
-	 * e.printStackTrace(); return false; }
-	 * 
-	 * }
-	 */
 	public static boolean isFileExists(String fileName) {
 		return true;		
 	}
-//	public static void deleteAzureFile(String docName,String azure_key,String azure_container) {
-//		BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-//		client.blobName(docName).buildClient().delete();
-//	}
 	public static String calculateTime(String startDate, String startTime, String deliveryDate, String deliveryTime) {
 //		System.out.println("Start Date : "+startDate+"\tStart Time : "+startTime+"\tDelivery date : "+deliveryDate+"\t"
 //				+ "Delivery Time : "+deliveryTime);

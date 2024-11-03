@@ -1,9 +1,7 @@
 package client_master;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -14,9 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
 
+import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import admin.seo.SeoOnPage_ACT;
 import commons.DateUtil;
@@ -32,8 +30,7 @@ public class BillingFollowUp_CTRL extends HttpServlet {
 		Properties properties = new Properties();
 		properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 		String docpath=properties.getProperty("path")+"documents";
-		String azure_key=properties.getProperty("azure_key");
-		String azure_container=properties.getProperty("azure_container");
+		String docBasePath=properties.getProperty("docBasePath");
 		
 		HttpSession session = request.getSession();
 
@@ -55,15 +52,9 @@ public class BillingFollowUp_CTRL extends HttpServlet {
 		imgname=key+"_"+imgname;
 		File newFile = new File(docpath+imgname);
 		file.renameTo(newFile);
-		fpath="https://corpseednew.blob.core.windows.net/"+azure_container+File.separator+imgname;
+		fpath=docBasePath+imgname;
 		
-		BlobClientBuilder client = new BlobClientBuilder();
-        client.connectionString(azure_key);
-        client.containerName(azure_container);
-        InputStream targetStream = new FileInputStream(newFile);
-        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
-		
-		targetStream.close();
+		CloudService.uploadDocument(newFile, imgname);
 		newFile.delete();
 		}
 		String pfupid = m.getParameter("pfupid");

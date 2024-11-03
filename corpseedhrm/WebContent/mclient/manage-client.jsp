@@ -25,7 +25,7 @@ if(SearchByClientNameReg==null||SearchByClientNameReg.length()<=0)SearchByClient
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String domain=properties.getProperty("domain");
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 
 //pagination start
 int pageNo=1;
@@ -805,7 +805,7 @@ function validateExport(){
 		$("#Protected").val("2")
 		$("#FilePassword").val("NA");
 	}
-	var baseName="<%=azure_path%>";
+	var baseName="<%=docBasePath%>";
 	columns+="";
 	showLoader();
 	$.ajax({

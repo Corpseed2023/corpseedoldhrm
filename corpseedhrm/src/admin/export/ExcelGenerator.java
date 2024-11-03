@@ -1,9 +1,7 @@
 package admin.export;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +12,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.azure.storage.blob.BlobClientBuilder;
-
-import commons.AzureBlob;
+import admin.master.CloudService;
 import commons.CommonHelper;
 
 public class ExcelGenerator {
@@ -76,19 +72,8 @@ public class ExcelGenerator {
         
 			Thread.sleep(2000);
 		
-        
-	        String azure_key="DefaultEndpointsProtocol=https;AccountName=corpseednew;AccountKey=N05EHjAaC6CYvMayzKTDucQ0Srgg39Kd1SY2OJ1JBB1qmLL7ifuNUntw1PxutjcKWWo8YGeN9gY8+ASt1o9/3g==;EndpointSuffix=core.windows.net";
-	        String azure_container="corpseed-crm";
-	        
-	        BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-	        client.connectionString(azure_key);
-	        client.containerName(azure_container);
 	        File path = new File(basePath+"/"+excelFilePath);
-	//        System.out.println("export file name==="+excelFilePath);
-	        InputStream targetStream = new FileInputStream(path);
-	        client.blobName(excelFilePath).buildClient().upload(targetStream,path.length());
-//			System.out.println("export file name==="+excelFilePath);
-			targetStream.close();
+	        CloudService.uploadDocument(path, excelFilePath);
 			if(path.exists())path.delete();
 		
 		} catch (Exception e) {

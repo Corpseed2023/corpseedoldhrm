@@ -1,5 +1,3 @@
-<%@page import="commons.AzureBlob"%>
-<%@page import="com.azure.storage.blob.BlobClientBuilder"%>
 <%@page import="java.nio.file.Files"%>
 <%@page import="java.nio.file.Paths"%>
 <%@page import="java.util.Properties"%>
@@ -31,9 +29,7 @@ if(personalDoActionFiles==null||personalDoActionFiles.length()<=0)personalDoActi
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String docpath=properties.getProperty("path")+"documents";
-String azure_key=properties.getProperty("azure_key");
-String azure_container=properties.getProperty("azure_container");
-String azure_path=properties.getProperty("azure_path");
+String docBasePath=properties.getProperty("docBasePath");
 String domain=properties.getProperty("domain");
 //pagination start
 int pageNo=1;
@@ -87,7 +83,6 @@ String sort_url=domain+"manage-sales.html?page="+pageNo+"&rows="+rows;
    </thead>
    <tbody>
    <%
-   BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
    int ssn=0;
    int showing=0;
    int startRange=pageNo-2;
@@ -119,9 +114,9 @@ String sort_url=domain+"manage-sales.html?page="+pageNo+"&rows="+rows;
  			if(fileName!=null&&!fileName.equalsIgnoreCase("NA")&&fileName.length()>0){
  				
  				long bytes=0;
- 				fileExist=client.blobName(fileName).buildClient().exists();
+ 				fileExist=CommonHelper.isFileExists(fileName);
  				if(fileExist){
- 					bytes=client.blobName(fileName).buildClient().getProperties().getBlobSize();
+ 					bytes=CommonHelper.getBlobSize(fileName);
  				}
  				long kb=bytes/1024;
  				long mb=kb/1024;	
@@ -145,7 +140,7 @@ String sort_url=domain+"manage-sales.html?page="+pageNo+"&rows="+rows;
            <form onsubmit="return false" class="uploadFileClass<%=i %>">
 			<input type="file" name="uploadFileBox<%=i %>" onchange="fileSizeCompaitable('<%=files[i][0] %>','<%=i %>')" id="UploadFileBox<%=i %>" style="display: none;">	
 			<a onclick="$('#UploadFileBox<%=i %>').click()"><i class="fas fa-file-upload" aria-hidden="true" title="Upload file" style="color: #0066ff;font-size: 22px;"></i></a> 
-			<%if(!orgFileName.equalsIgnoreCase("NA")&&fileExist){ %><a href="<%=azure_path%><%=files[i][4]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Upload file" style="color: #0066ff;font-size: 22px;"></i></a>
+			<%if(!orgFileName.equalsIgnoreCase("NA")&&fileExist){ %><a href="<%=docBasePath%><%=files[i][4]%>" download><i class="fas fa-file-download" aria-hidden="true" title="Upload file" style="color: #0066ff;font-size: 22px;"></i></a>
 			<a onclick="deletePersonalFile('<%=files[i][0] %>','<%=files[i][4]%>')"><i class="fas fa-trash" aria-hidden="true" title="delete file" style="color: #0066ff;font-size: 22px;"></i></a>  <%} %>
 			</form>
            </td>

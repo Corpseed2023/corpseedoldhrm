@@ -1,6 +1,5 @@
 
-<%@page import="commons.AzureBlob"%>
-<%@page import="com.azure.storage.blob.BlobClientBuilder"%> 
+<%@page import="commons.CommonHelper"%>
 <%@page import="java.nio.file.Files"%>
 <%@ page contentType="text/html; charset=iso-8859-1" language="java"%>
 <%@ page import="net.sf.json.JSONObject,net.sf.json.JSONArray"%>
@@ -19,10 +18,7 @@ PreparedStatement ps=null;
 String sql=null;
 try(Connection con=DbCon.getCon("","","")){
 	Properties properties = new Properties();
-	properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-	String azure_key=properties.getProperty("azure_key");
-	String azure_container=properties.getProperty("azure_container");
-	BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);	
+	properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));				
 	
 	sql="select pfkey,pfmilestonekey,pfmilestonename,pfdynamicform,pfcontent,pffilename,"
 	+"pfdate,pftime,pfsubmitstatus,pfaddedbyuid,pfaddedbyname,pfformsubmitstatus,"
@@ -54,10 +50,10 @@ try(Connection con=DbCon.getCon("","","")){
 		String size="";
 		if(fileName!=null&&!fileName.equalsIgnoreCase("NA")&&fileName.length()>0){
 		
-	boolean fileExist=client.blobName(fileName).buildClient().exists();
+	boolean fileExist=CommonHelper.isFileExists(fileName);
 	long bytes=0;
 	if(fileExist){
-		bytes=client.blobName(fileName).buildClient().getProperties().getBlobSize();
+		bytes=CommonHelper.getBlobSize(fileName);
 	}			
 	long kb=bytes/1024;
 	long mb=kb/1024;	

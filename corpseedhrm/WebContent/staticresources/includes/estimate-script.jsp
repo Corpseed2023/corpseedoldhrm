@@ -2872,7 +2872,7 @@ function setClientDocuments(){
 	var estKey=$("#ConvertEstimateDocRefKey").val();
 	$(".documentInnerId").remove();
 	showLoader();
-	var path="<%=azurePath%>";
+	var path="<%=docBasePath%>";
 	$.ajax({
 		type : "GET",
 		url : "GetEstimateDocument111",
@@ -3039,7 +3039,7 @@ function openReceipt(mainfolder,docname){
 	if(docname.toLowerCase()=="na"){
 		$("#warningDocument").modal("show");
 	}else{
-		window.open("<%=azurePath%>"+docname);
+		window.open("<%=docBasePath%>"+docname);
 		}
 }
 
@@ -3739,7 +3739,7 @@ function validateExport(){
 		$("#Protected").val("2")
 		$("#FilePassword").val("NA");
 	}
-	var baseName="<%=azurePath%>";
+	var baseName="<%=docBasePath%>";
 	columns+="";
 	showLoader();
 	$.ajax({
@@ -4141,7 +4141,7 @@ function fillDocumentUploadHistory(estkey){
 				var action='<a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-arrow-down text-muted"></i></a>'+
 				'<a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-trash text-muted"></i></a>';
 				
-				var docLink="<%=azurePath%>"+docName;
+				var docLink="<%=docBasePath%>"+docName;
 				
 				if(Number(exist)==1 && role=="Admin"){
 					action='<a id="Download'+id+'" href="'+docLink+'" download><i class="fas fa-arrow-down"></i></a>'+

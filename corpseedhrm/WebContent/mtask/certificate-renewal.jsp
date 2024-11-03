@@ -19,7 +19,7 @@
 	
 	Properties properties = new Properties();
 	properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));		
-	String azure_path=properties.getProperty("azure_path");
+	String docBasePath=properties.getProperty("docBasePath");
 	String domain=properties.getProperty("domain");
 	
 	//pagination start
@@ -170,7 +170,7 @@
 						            <td><%=renewals[i][1] %> : <%=renewals[i][2] %></td>
 						            <td>
 						            <%if(certificates>0){ %>
-									<a <%if(certificates==1){ %>href="<%=azure_path%><%=docName%>" target="_blank"<%}else{ %>href="#" onclick="showAllCertificates('<%=renewals[i][8]%>')"<%} %>><i class="fas fa-file-alt"></i>
+									<a <%if(certificates==1){ %>href="<%=docBasePath%><%=docName%>" target="_blank"<%}else{ %>href="#" onclick="showAllCertificates('<%=renewals[i][8]%>')"<%} %>><i class="fas fa-file-alt"></i>
 									<%if(certificates>1){ %><span class="plusNo">+<%=certificates %></span><%} %></a><%}else{ %>
 									<span class="text-danger">No Document</span>
 									<%} %>
@@ -341,7 +341,7 @@ function verifyRenewal(action){
 }
 
 function showAllCertificates(milestoneuuid){
-	var path="<%=azure_path%>";
+	var path="<%=docBasePath%>";
 	$(".pad0").remove();
 	showLoader();
 	$.ajax({

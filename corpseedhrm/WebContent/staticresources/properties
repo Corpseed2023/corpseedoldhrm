@@ -8,10 +8,6 @@ loginuaid=178
 domain=https://crm.corpseed.com/
 corpseed_domain=https://www.corpseed.com/
 
-azure_key=DefaultEndpointsProtocol=https;AccountName=corpseednew;AccountKey=N05EHjAaC6CYvMayzKTDucQ0Srgg39Kd1SY2OJ1JBB1qmLL7ifuNUntw1PxutjcKWWo8YGeN9gY8+ASt1o9/3g==;EndpointSuffix=core.windows.net;
-azure_container=corpseed-crm
-azure_path=https://corpseednew.blob.core.windows.net/corpseed-crm/
-
 
 docBasePath=https://erp-corpseed.s3.ap-south-1.amazonaws.com/
 
