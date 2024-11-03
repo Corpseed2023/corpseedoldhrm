@@ -2,17 +2,21 @@ package commons;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Formatter;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-import org.apache.commons.lang.RandomStringUtils;
-
-import com.azure.storage.blob.BlobClientBuilder;
+import javax.servlet.http.HttpServletRequest;
 
 import admin.enquiry.Enquiry_ACT;
 import admin.master.Usermaster_ACT;
@@ -45,9 +49,23 @@ public class CommonHelper {
 		}
 		    
 		}
+	public static double convertUptoDecimalAndRound(double amount,int point) {
+			String formatedAmount = String.format("%."+point+"f", amount);
+			return Math.round(Double.parseDouble(formatedAmount));
+		}
 	public static String withLargeIntegers(double value) {
 		DecimalFormat df = new DecimalFormat("#,###.00");
 		return df.format(value);
+	}
+	
+	public static double convertUptoDecimal(double amount, int points) {
+		String formatedAmount = String.format("%."+points+"f", amount);
+		return Double.parseDouble(formatedAmount);
+	}
+	
+	public static double findPercent(double amount, double percent) {
+		double percentAmount = (amount * percent)/100;
+		return convertUptoDecimal(percentAmount, 2);
 	}
 	
 	public static int callPostURL(String POST_URL,String POST_PARAMS) {
@@ -247,30 +265,36 @@ public class CommonHelper {
 		return time;
 	}
 	
-	public static long getBlobSize(String fileName,String azure_key,String azure_container) {
-		try {
-		BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-		return client.blobName(fileName).buildClient().getProperties().getBlobSize();
-		}catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		}
+//	public static long getBlobSize(String fileName,String azure_key,String azure_container) {
+//		try {
+//		BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
+//		return client.blobName(fileName).buildClient().getProperties().getBlobSize();
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			return 0;
+//		}
+//	}
+	
+	public static long getBlobSize(String fileName) {
+		return 1024;
 	}
 	
-	public static boolean isFileExists(String fileName,String azure_key,String azure_container) {
-		try {
-			BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-			return client.blobName(fileName).buildClient().exists();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		
+	/*
+	 * public static boolean isFileExists(String fileName,String azure_key,String
+	 * azure_container) { try { BlobClientBuilder
+	 * client=AzureBlob.getBlobClient(azure_key, azure_container); return
+	 * client.blobName(fileName).buildClient().exists(); } catch (Exception e) {
+	 * e.printStackTrace(); return false; }
+	 * 
+	 * }
+	 */
+	public static boolean isFileExists(String fileName) {
+		return true;		
 	}
-	public static void deleteAzureFile(String docName,String azure_key,String azure_container) {
-		BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-		client.blobName(docName).buildClient().delete();
-	}
+//	public static void deleteAzureFile(String docName,String azure_key,String azure_container) {
+//		BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
+//		client.blobName(docName).buildClient().delete();
+//	}
 	public static String calculateTime(String startDate, String startTime, String deliveryDate, String deliveryTime) {
 //		System.out.println("Start Date : "+startDate+"\tStart Time : "+startTime+"\tDelivery date : "+deliveryDate+"\t"
 //				+ "Delivery Time : "+deliveryTime);
@@ -323,5 +347,35 @@ public class CommonHelper {
 		return result;
 		
 	}
+	
+	public static List<String> getCurrectIp(){
+		 try {
+			 List<String> currentIp = Collections.list(NetworkInterface.getNetworkInterfaces()).stream()
+	                    .filter(iface -> iface.getDisplayName().toLowerCase().contains("wi-fi") ||
+	                            iface.getDisplayName().toLowerCase().contains("wireless"))
+	                    .flatMap(iface -> Collections.list(iface.getInetAddresses()).stream())
+	                    .filter(inetAddress -> !inetAddress.isLoopbackAddress() &&
+	                            inetAddress instanceof java.net.Inet6Address &&
+	                            !inetAddress.getHostAddress().startsWith("fe80:"))
+	                    .map(ip->ip.getHostAddress())
+	                    .collect(Collectors.toList());
+			 
+
+			 
+			 System.out.println(currentIp+"My IP");
+			 
+			 return currentIp;
+
+	        } catch (SocketException e) {
+	            e.printStackTrace();
+	            return Collections.emptyList();
+	        }
+	}
+	
+	 public static String getExternalIP(HttpServletRequest request) {
+
+//		 System.out.println("External Ip is"+ request.getRemoteAddr() );
+		 return Objects.nonNull(request) ? request.getRemoteAddr() : "0";
+	 }
 		
 }

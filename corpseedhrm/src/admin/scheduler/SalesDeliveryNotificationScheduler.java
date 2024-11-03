@@ -480,7 +480,7 @@ public class SalesDeliveryNotificationScheduler extends TimerTask {
 						String receiverName=deliveryTeam[i][2];
 						String emailTo=Usermaster_ACT.getUserEmail(deliveryTeam[i][1], deliveryTeam[i][3]);
 						String message=ExcelGenerator.findTomorrowDeliveryMilestoneMessage(receiverName,taskDeliveryManager);
-						Enquiry_ACT.saveEmail(emailTo, "sakshi.jaggi@corpseed.com", "Milestone delivery on "+dateAfterDays, message, 2, "NA");
+						Enquiry_ACT.saveEmail(emailTo, "update@corpseed.com", "Milestone delivery on "+dateAfterDays, message, 2, "NA");
 					}
 				}
 			}
@@ -573,7 +573,7 @@ public class SalesDeliveryNotificationScheduler extends TimerTask {
 						String receiverName=deliveryTeam[i][2];
 						String emailTo=Usermaster_ACT.getUserEmail(deliveryTeam[i][1], deliveryTeam[i][3]);
 						String message=ExcelGenerator.findExpiredMilestoneMessage(receiverName,taskDeliveryManager);
-						Enquiry_ACT.saveEmail(emailTo, "sakshi.jaggi@corpseed.com", "Expired Milestone Report "+DateUtil.getCurrentDateIndianFormat(), message, 2, "NA");
+						Enquiry_ACT.saveEmail(emailTo, "update@corpseed.com", "Expired Milestone Report "+DateUtil.getCurrentDateIndianFormat(), message, 2, "NA");
 					}
 				}
 			}

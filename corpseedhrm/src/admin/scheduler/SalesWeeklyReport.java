@@ -100,7 +100,7 @@ public class SalesWeeklyReport extends TimerTask {
 				}				
 				//Send weekly report to accountant
 				ExcelGenerator.uploadExportedFile(excelFilePathAccountant,workbookAccountant);
-				String filePathAccountant="https://corpseeds.blob.core.windows.net/corpseed-crm/"+excelFilePathAccountant;				
+				String filePathAccountant="https://corpseednew.blob.core.windows.net/corpseed-crm/"+excelFilePathAccountant;				
 //				System.out.println("sales path="+filePathAccountant);
 				String messageAccountant = ExcelGenerator.findWeeklyMessage(date7DaysBefore, today,"Praveen Kumar",filePathAccountant);
 				Enquiry_ACT.saveEmail("praveen.kumar@corpseed.com", "empty", "Sales Weekly Report between "+date7DaysBefore+" to "+today, messageAccountant, 2, "NA");
@@ -147,7 +147,7 @@ public class SalesWeeklyReport extends TimerTask {
 							}
 						}		
 						ExcelGenerator.uploadExportedFile(excelFilePathManager,workbookManager);
-						String filePathManager="https://corpseeds.blob.core.windows.net/corpseed-crm/"+excelFilePathManager;
+						String filePathManager="https://corpseednew.blob.core.windows.net/corpseed-crm/"+excelFilePathManager;
 //						System.out.println("filePathManager"+filePathManager);
 						String message=ExcelGenerator.findWeeklyMessage(date7DaysBefore, today, teams[i][2], filePathManager);
 						String emailTo=Usermaster_ACT.getUserEmail(teams[i][1], teams[i][3]);
@@ -198,10 +198,10 @@ public class SalesWeeklyReport extends TimerTask {
 					}
 				}		
 				ExcelGenerator.uploadExportedFile(excelFilePathceo,workbookceo);
-				String filePathceo="https://corpseeds.blob.core.windows.net/corpseed-crm/"+excelFilePathceo;
+				String filePathceo="https://corpseednew.blob.core.windows.net/corpseed-crm/"+excelFilePathceo;
 //						System.out.println("filePathManager"+filePathManager);
 				String message=ExcelGenerator.findDueSalesMessageForCeo("Vipan", filePathceo,date7DaysBefore+" to "+today);
-				Enquiry_ACT.saveEmail("vipan@corpseed.com", "empty", "Due Sales Report", message, 2, "NA");
+				Enquiry_ACT.saveEmail("update@corpseed.com", "empty", "Due Sales Report", message, 2, "NA");
 				
 			}else
 				workbookceo.close();		
@@ -235,9 +235,9 @@ public class SalesWeeklyReport extends TimerTask {
 							contactName,estimates[j][5],userName,saleType),rowDraft,workbookDraft);											
 				}
 				ExcelGenerator.uploadExportedFile(excelFilePathDraft,workbookDraft);
-				String filePathDraft="https://corpseeds.blob.core.windows.net/corpseed-crm/"+excelFilePathDraft;
+				String filePathDraft="https://corpseednew.blob.core.windows.net/corpseed-crm/"+excelFilePathDraft;
 				String receiverName="Vipan";
-				String emailTo="vipan@corpseed.com";
+				String emailTo="update@corpseed.com";
 				String message=ExcelGenerator.findDraftEstimateMessageCeo(receiverName,filePathDraft);
 				Enquiry_ACT.saveEmail(emailTo, "empty", "More than one week draft estimates report. : "+DateUtil.getCurrentDateIndianFormat(), message, 2, "NA");
 			}

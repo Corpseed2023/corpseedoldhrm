@@ -21,6 +21,9 @@ public class EmailScheduler extends TimerTask {
 					int sendPost = cron_job_ACT.sendPost(url, post_param);	
 //					System.out.println("sendPost=="+sendPost);
 					Thread.sleep(10000);
+					
+//					int sendPost=200;
+					
 					if(sendPost==200)
 					Enquiry_ACT.updateEmailScheduler(emails[i][4],1);
 				}catch(Exception e) {e.printStackTrace();}

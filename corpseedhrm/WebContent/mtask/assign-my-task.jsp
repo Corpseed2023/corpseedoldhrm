@@ -80,9 +80,10 @@ if(activityType==null||activityType.length()<=0)activityType="NA";
 Properties properties = new Properties();
 properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 String docpath=properties.getProperty("path")+"documents";
-String azure_key=properties.getProperty("azure_key");
+/* String azure_key=properties.getProperty("azure_key");
 String azure_container=properties.getProperty("azure_container");
-String azure_path=properties.getProperty("azure_path");
+String azure_path=properties.getProperty("azure_path"); */
+String docBasePath=properties.getProperty("docBasePath");
 
 String currentTime=DateUtil.getCurrentTime24Hours();
 String country[][]=TaskMaster_ACT.getAllCountries();
@@ -1149,7 +1150,7 @@ if(doclist!=null&&doclist.length>0){
 	for(int i=0;i<doclist.length;i++){
 		boolean fileExist=false;
 		if(doclist[i][4]!=null&&!doclist[i][4].equalsIgnoreCase("NA"))
-			fileExist=CommonHelper.isFileExists(doclist[i][4], azure_key, azure_container);
+			fileExist=CommonHelper.isFileExists(doclist[i][4]);
 // System.out.println("document=="+doclist[i][1]+"#"+doclist[i][6]+"#"+payPercent+"#"+fileExist);
 %>
 <div class="clearfix bg_wht link-style12">
@@ -1166,7 +1167,7 @@ if(doclist!=null&&doclist.length>0){
    <div class="col-xs-2 box-intro-background">
        <p class="news-border" style="font-size: 15px;">
 	   <%if(doclist[i][4]!=null&&doclist[i][4].length()>0&&!doclist[i][4].equalsIgnoreCase("NA")&&fileExist){ %>
-	   <a class="bg_none colorNone MainDownloadIcon<%=i %>" href="<%=azure_path%><%=doclist[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
+	   <a class="bg_none colorNone MainDownloadIcon<%=i %>" href="<%=docBasePath%><%=doclist[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
        <%}%>
       <span id="AppendDocDownload<%=i %>"></span>
        <span style="margin-right: 3px;">
@@ -1215,7 +1216,7 @@ if(doclist1!=null&&doclist1.length>0){
 	for(int i=0;i<doclist1.length;i++){
 		boolean fileExist=false;
 		if(doclist1[i][4]!=null&&!doclist1[i][4].equalsIgnoreCase("NA"))
-			fileExist=CommonHelper.isFileExists(doclist1[i][4], azure_key, azure_container);
+			fileExist=CommonHelper.isFileExists(doclist1[i][4]);
 %>
 <div class="clearfix bg_wht link-style12">
    <div class="col-xs-3 box-intro-background">
@@ -1231,7 +1232,7 @@ if(doclist1!=null&&doclist1.length>0){
    <div class="col-xs-2 box-intro-background">
        <p class="news-border" style="font-size: 15px;">
 	   <%if(doclist1[i][4]!=null&&doclist1[i][4].length()>0&&!doclist1[i][4].equalsIgnoreCase("NA")&&fileExist){ %>
-	   <a class="bg_none colorNone MainDownloadIcon1<%=i %>" href="<%=azure_path%><%=doclist1[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
+	   <a class="bg_none colorNone MainDownloadIcon1<%=i %>" href="<%=docBasePath%><%=doclist1[i][4] %>" download><i class="fas fa-arrow-down pointers" title="Download this document"></i></a>
        <%}%> 
       <span id="AppendDocDownload1<%=i %>"></span>
        <span style="margin-right: 3px;">
@@ -1275,7 +1276,7 @@ if(docAction!=null&&docAction.length>0){
 		if(docAction[i][9]!=null&&docAction[i][9].length()>0&&!docAction[i][9].equalsIgnoreCase("NA"))existDoc=true;
 		boolean fileExist=false;
 		if(existDoc)
-			 fileExist=CommonHelper.isFileExists(docAction[i][9], azure_key, azure_container);
+			 fileExist=CommonHelper.isFileExists(docAction[i][9]);
 	%>
 	<div class="clearfix bg_wht link-style12">
 	   <div class="col-xs-2 box-intro-background">
@@ -1291,7 +1292,7 @@ if(docAction!=null&&docAction.length>0){
 	   <div class="col-xs-1 box-intro-background">
 	      <div class="clearfix">
 	       <p class="news-border"><%if(userRole.equalsIgnoreCase("Admin")&&status){ %>
-	       <a id="Download<%=docAction[i][0] %>" <%if(existDoc&&fileExist){%>href="<%=azure_path%><%=docAction[i][9] %>" download<%}else{ %>data-toggle="modal" data-target="#NoDocument"<%} %>><i class="fas fa-arrow-down <%if(!existDoc){%>text-muted<%}%>"></i></a>&nbsp;
+	       <a id="Download<%=docAction[i][0] %>" <%if(existDoc&&fileExist){%>href="<%=docBasePath%><%=docAction[i][9] %>" download<%}else{ %>data-toggle="modal" data-target="#NoDocument"<%} %>><i class="fas fa-arrow-down <%if(!existDoc){%>text-muted<%}%>"></i></a>&nbsp;
 	       <a id="Delete<%=docAction[i][0] %>" <%if(existDoc&&fileExist){%>onclick="deleteDocument('<%=docAction[i][0] %>','<%=docAction[i][9] %>')"<%}else{ %>data-toggle="modal" data-target="#NoDocument"<%} %>><i class="fas fa-trash  <%if(!existDoc&&!fileExist){%>text-muted<%}else{%>text-danger<%}%>"></i></a><%}else{ %>
 	       <a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-arrow-down text-muted"></i></a>
 	       <a href="#" data-toggle="modal" data-target="#PermissionNot"><i class="fas fa-trash text-muted"></i></a>
@@ -1442,9 +1443,9 @@ if(followUp!=null&&followUp.length>0){
 		Path path=null;
 		if(followUp[i][6]!=null&&!followUp[i][6].equalsIgnoreCase("NA")&&followUp[i][6].length()>0){
 			long bytes=0;
-			boolean fileExist=CommonHelper.isFileExists(fileName, azure_key, azure_container);
+			boolean fileExist=CommonHelper.isFileExists(fileName);
 			if(fileExist){
-				bytes=CommonHelper.getBlobSize(fileName, azure_key, azure_container);
+				bytes=CommonHelper.getBlobSize(fileName);
 			}
 			long kb=bytes/1024;
 			long mb=kb/1024;	
@@ -1470,7 +1471,7 @@ if(followUp!=null&&followUp.length>0){
 <%if(followUp[i][6]!=null&&!followUp[i][6].equalsIgnoreCase("NA")&&followUp[i][6].length()>0){%>
 <div class="clearfix download_file">
 <div class="download_box"><span><img src="<%=request.getContextPath() %>/staticresources/images/file.png" alt=""><span title="<%=followUp[i][6].substring(21) %>"><%=followUp[i][6].substring(21) %></span></span>
-<a href="<%=azure_path%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
+<a href="<%=docBasePath%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
 <div class="download_size"><span><%=size %>  <%=extension.toUpperCase()%></span><span><%=followUp[i][8] %></span></div>
 </div>
 <%} %>
@@ -1490,7 +1491,7 @@ if(followUp!=null&&followUp.length>0){
 <%if(followUp[i][6]!=null&&!followUp[i][6].equalsIgnoreCase("NA")&&followUp[i][6].length()>0){%>
 <div class="clearfix download_file">
 <div class="download_box"><span><img src="<%=request.getContextPath() %>/staticresources/images/file.png" alt=""><span title="<%=followUp[i][6].substring(21) %>"><%=followUp[i][6].substring(21) %></span></span>
-<a href="<%=azure_path%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
+<a href="<%=docBasePath%><%=followUp[i][6]%>" download><img src="<%=request.getContextPath() %>/staticresources/images/download.png" alt=""></a></div>
 <div class="download_size"><span><%=size %>  <%=extension.toUpperCase()%></span><span><%=followUp[i][8] %></span></div>
 </div>
 <%} %>
@@ -2370,7 +2371,7 @@ function uploadFile(uploadbox,MainDownloadIcon,AppendDocDownload,docKey,File,Doc
         	if(x[0]=="pass"){
         	document.getElementById('errorMsg1').innerHTML ="Uploaded Successfully !!";
         	$("#"+DocumentListDateId).html(today);
-        	var fileDownload="<%=azure_path%>"+x[1];
+        	var fileDownload="<%=docBasePath%>"+x[1];
         	//change date and color
         	$("."+MainDownloadIcon).hide();
 			$(''+
@@ -2649,7 +2650,7 @@ function setToolTipText(salesmilestonekey){
 		response = JSON.parse(response);			
 		 var len = response.length;		
 		 if(len>0){
-			 var home="<%=azure_path%>";
+			 var home="<%=docBasePath%>";
 			 for(var i=0;i<Number(len);i++){	
 				var content=response[i]["content"];
 			 	var document=response[i]["document"];	

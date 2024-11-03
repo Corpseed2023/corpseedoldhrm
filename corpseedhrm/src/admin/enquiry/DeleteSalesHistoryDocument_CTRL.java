@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.master.CloudService;
 import commons.CommonHelper;
 
 public class DeleteSalesHistoryDocument_CTRL extends HttpServlet {
@@ -29,16 +30,13 @@ public class DeleteSalesHistoryDocument_CTRL extends HttpServlet {
 			boolean flag=Enquiry_ACT.deleteSalesDocumentHistory(docId);
 			
 			if(flag){
-				Properties properties = new Properties();
-				properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-				String azure_key=properties.getProperty("azure_key");
-				String azure_container=properties.getProperty("azure_container");
-				if(CommonHelper.isFileExists(docName, azure_key, azure_container)) {
-					CommonHelper.deleteAzureFile(docName,azure_key, azure_container);
+				boolean isDeleted = CloudService.deleteFileIfExist(docName);	
+				if(isDeleted) {
+					pw.write("pass");
+				}else {
+					pw.write("fail");
 				}
 				
-				
-				pw.write("pass");
 			}else{pw.write("fail");}
 		}
 		catch (Exception e) {

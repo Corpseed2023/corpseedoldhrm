@@ -227,7 +227,7 @@ String teams[][]=TaskMaster_ACT.findTeamByDepartment("Sales");
 </div>
 <div class="col-md-3 col-xs-4">
 <button type="button" class="filtermenu dropbtn" style="width: 90px;" data-toggle="modal" data-target="#ExportData">&nbsp;Export</button>
-</div>
+</div>  
 </div>
 <div class="col-md-7 col-sm-7 col-xs-12 min-height50">
 <div class="clearfix flex_box justify_end">  

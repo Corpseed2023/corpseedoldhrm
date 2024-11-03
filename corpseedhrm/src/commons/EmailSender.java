@@ -20,16 +20,16 @@ public class EmailSender {
 	      String sendrmailid = "updates@corpseed.com";	  
 	     //Mention user name and password as per your configuration
 	      final String uname = "updates@corpseed.com";
-	      final String pwd = "updates@418K#";
+	      final String pwd = "PHtE6r0IEOi4jG4q8RcBtPW+FcWsYIt8rOw2KgJO5YwXDqAAS01cq9opwWLh+Rh7U6JLQvWfyYM547qb4bnWI2rpMzkYWWqyqK3sx/VYSPOZsbq6x00UsV0Zd0DYV47vc95r0CDQu9jSNA==";
 	      //We are using relay.jangosmtp.net for sending emails
-	      String smtphost = "smtp.gmail.com";
+	      String smtphost = "smtp.zeptomail.in";
 	     //Set properties and their values
 	      Properties propvls = new Properties();
 	      propvls.put("mail.smtp.auth", "true");
 	      propvls.put("mail.smtp.starttls.enable", "true");
 	      propvls.put("mail.debug", "true");
 	      propvls.put("mail.smtp.host", smtphost);
-	      propvls.put("mail.smtp.port", "587");
+	      propvls.put("mail.smtp.port", "465");
 	      
 	      //Create a Session object & authenticate uid and pwd
 	      Session sessionobj = Session.getInstance(propvls,

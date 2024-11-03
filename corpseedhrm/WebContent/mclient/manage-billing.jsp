@@ -1343,6 +1343,50 @@ function fillPaymentDetails(invoiceno,rowid,clientrefid,contactrefid){
 			var holdremarks=response[i]["holdremarks"];
 			var service=response[i]["service"];
 			var povalidity=response[i]["povalidity"];
+			
+			var financialYear=response[i]["financialYear"];
+			var portalNumber=response[i]["portalNumber"];
+			var piboCategory=response[i]["piboCategory"];
+			var creditType=response[i]["creditType"];
+			var productCategory=response[i]["productCategory"];
+			var quantity=response[i]["quantity"];
+			var comment=response[i]["comment"];
+			
+			var moreDetails="";
+			if(financialYear!="NA"){
+				moreDetails = '<div class="col-sm-12 col-md-12">'+
+				'<div class="row">'+			
+				'<div class="col-sm-2 more-details">'+
+					'<label>Financial Year</label>'+
+				    '<input value="'+financialYear+'" readonly>'+
+				'</div>'+
+				'<div class="col-sm-2 more-details">'+
+				'<label>Portal Number</label>'+
+			    '<input value="'+portalNumber+'" readonly>'+
+				'</div>'+
+				'<div class="col-sm-2 more-details">'+
+				'<label>PIBO Category</label>'+
+			    '<input value="'+piboCategory+'" readonly>'+
+				'</div>'+
+				'<div class="col-sm-2 more-details">'+
+				'<label>Credit Type</label>'+
+			    '<input value="'+creditType+'" readonly>'+
+				'</div>'+
+				'<div class="col-sm-2 more-details">'+
+				'<label>Product Category</label>'+
+				'<input value="'+productCategory+'" readonly>'+
+				'</div>'+
+				'<div class="col-sm-2 more-details">'+
+				'<label>Quantity</label>'+
+				'<input value='+quantity+'" readonly>'+
+				'</div>'+
+				'</div>'+
+				'<div class="row">'+
+				'<p>'+comment+'</p>'+
+				'</div>'+
+				'</div>';
+			}
+			
 			if(Number(povalidity)===0)povalidity="";
 			
 			var ApproveBtnId="ApproveBtnId"+(i+1);
@@ -1362,7 +1406,7 @@ function fillPaymentDetails(invoiceno,rowid,clientrefid,contactrefid){
 			if(transactionid=="NA")transactionid="";
 			$(''+
 			'<div class="row pymentcnf" id="'+RowId+'">'+
-			'<div class="clearfix bg_wht" style="border-bottom: 1px solid #ddd;">'+		
+			'<div class="clearfix bg_wht" style="border-bottom: 1px solid #ddd;border-top: 1px solid #ddd;">'+		
 			'<div class="box-width7 col-xs-1 box-intro-background">'+
 			'<div class="clearfix">'+
 			'<p class="news-border">'+date+'</p>'+
@@ -1392,6 +1436,7 @@ function fillPaymentDetails(invoiceno,rowid,clientrefid,contactrefid){
 				'</p>'+
 			'</div>'+
 			'</div>'+
+			moreDetails+
 			'</div>'		
 			).insertBefore("#PymtCnfId");			
 			 }			

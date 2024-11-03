@@ -17,6 +17,7 @@
 <%@ include file="../staticresources/includes/itswsheader.jsp" %>
 <%
 String token= (String)session.getAttribute("uavalidtokenno");
+String userRole= (String)session.getAttribute("userRole");
 //pagination start
 int pageNo=1;
 int rows=10;
@@ -127,9 +128,10 @@ int totalAccount=Clientmaster_ACT.countAllAccounts(accountSearchByClientId,accou
       <tr>
           <th><span class="hashico">#</span><input type="checkbox" class="pointers noDisplay" id="CheckAll"></th>
           <th class="sorting <%if(sort.equals("name")){ %><%=sorting_order%><%} %>" onclick="sortBy('<%=sort_url%>','name','<%=order%>')">Name</th>
+          <%if(userRole.equalsIgnoreCase("Admin")){ %>
           <th class="sorting <%if(sort.equals("phone")){ %><%=sorting_order%><%} %>" onclick="sortBy('<%=sort_url%>','phone','<%=order%>')">Phone</th>
           <th class="sorting <%if(sort.equals("email")){ %><%=sorting_order%><%} %>" onclick="sortBy('<%=sort_url%>','email','<%=order%>')">Email</th>
-          <th>Running Balance</th>          
+          <%} %><th>Running Balance</th>          
       </tr>
   </thead>
   <tbody>
@@ -178,8 +180,9 @@ int totalAccount=Clientmaster_ACT.countAllAccounts(accountSearchByClientId,accou
       <tr>
           <td><input type="checkbox" name="checkbox" id="checkbox" class="checked"></td>
           <td><%=client[i][1] %></td>
+           <%if(userRole.equalsIgnoreCase("Admin")){ %>
           <td><%=client[i][2] %></td>
-          <td><%=client[i][3] %></td>
+          <td><%=client[i][3] %></td> <%} %>
           <td><%if(ACC01){ %><a href="javascript:void(0);" onclick="vieweditpage('<%=client[i][0] %>');" class="bg_none <%if(runningbalance<0) {%>text-danger<%} %>"><i class="fas fa-inr"></i>&nbsp;<%=CommonHelper.formatValue(runningbalance)%></a><%} %></td>
                    
       </tr>

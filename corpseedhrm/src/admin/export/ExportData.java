@@ -1275,7 +1275,6 @@ public class ExportData {
             			invMap.put(inv, 1);
             	}
             	
-            	
             	if(metaData.getColumnLabel(i).equals("Order_Amount")||
             			metaData.getColumnLabel(i).equals("Paid_Amount")||
             			metaData.getColumnLabel(i).equals("Due_Amount")) {
@@ -1291,6 +1290,8 @@ public class ExportData {
             		
             	}else if(metaData.getColumnLabel(i).equals("Work_Status"))
             		valueObject=(((String)result.getObject(i)).equals("1"))?"In-Active":(((String)result.getObject(i)).equals("2"))?"Completed":"In-Progress";
+            	else if(metaData.getColumnLabel(i).equalsIgnoreCase("Assignee"))
+            		valueObject = getAllAssignee(result,(String)result.getObject(i),token,con);
             	else            
             		valueObject = result.getObject(i);         	
             	            	
@@ -1364,6 +1365,32 @@ public class ExportData {
         CreationHelper creationHelper = workbook.getCreationHelper();
         cellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-MM-dd HH:mm:ss"));
         cell.setCellStyle(cellStyle);
+    }
+    
+    private String getAllAssignee(ResultSet result1,String salesKey,String token,Connection connection) {
+    	String name="";
+    	Statement statement1=null;
+    	try {
+            statement1 = connection.createStatement();
+ 
+            result1 = statement1.executeQuery("SELECT u.uaname FROM user_account u INNER JOIN manage_assignctrl ma on ma.mateammemberid = u.uaid WHERE ma.masalesrefid='"+salesKey+"' and ma.matokenno='"+token+"' group by u.uaname");
+           
+            while(result1!=null&&result1.next()) {
+            	
+            	name+=result1.getString(1)+", ";
+            }
+            name = name.trim();
+        } catch (SQLException e) {
+        	log.info("Datababse error in export():ExportData class"+e.getMessage());
+            e.printStackTrace();
+        }finally {
+			try {
+			if(statement1!=null)statement1.close();			
+			}catch(SQLException e) {
+				log.info("getAllAssignee() Sql error :" + e.getMessage());
+			}
+		}
+    	return name.length()>0 ? name.substring(0,name.length()-1) : name;
     }
     
     private String getSalesPerson(ResultSet result1,String uid,String token,Connection connection) {

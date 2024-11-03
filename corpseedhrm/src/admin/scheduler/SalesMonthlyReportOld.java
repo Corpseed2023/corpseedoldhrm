@@ -89,7 +89,7 @@ public class SalesMonthlyReportOld extends TimerTask {
 //			System.out.println(filePathOperation);
 			
 			String emailTo="navjot.singh@corpseed.com";
-			String emailToCC="vipan@corpseed.com";
+			String emailToCC="update@corpseed.com";
 			String Subject="Monthly Sales Report : "+startDate+" - "+endDate;
 			//sending email to quality 
 			String messageQuality=ExcelGenerator.findSalesMonthlyMessage(startDate,endDate,"Navjot",filePathQuality);

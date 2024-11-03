@@ -23,7 +23,7 @@ try {
 		  
 		String token = (String) session.getAttribute("uavalidtokenno");
 		String loginuaid = (String) session.getAttribute("loginuaid");
-		
+		if(token!=null && token.length()>0 && loginuaid!=null && loginuaid.length()>0) {
 		String unbillno = request.getParameter("unbillno");
 		if(unbillno!=null)unbillno=unbillno.trim();
 		
@@ -32,7 +32,12 @@ try {
 		String clientkey=Enquiry_ACT.getSalesClientKey(invoice, token);
 //		System.out.println("clientkey=="+clientkey);
 		String company[][]=Enquiry_ACT.getCompanyByKey(clientkey,token);
-		if(company!=null&&company.length>0) {
+		boolean isInvoiceConverted = false;
+		synchronized (this) {
+			isInvoiceConverted = TaskMaster_ACT.isInvoiceConverted(unbillno,token);
+		}
+		
+		if(!isInvoiceConverted && company!=null&&company.length>0) {
 			String payment[]=TaskMaster_ACT.getSalesPayment(unbillno,token);
 			
 			String final_invoice=CommonHelper.getInvoice(token, loginuaid, RandomStringUtils.random(40,true,true),"TAX");
@@ -97,7 +102,7 @@ try {
 				}
 			}
 		}
-		}
+		}}
 }catch(Exception e) {
 	e.printStackTrace();
 }

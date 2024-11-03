@@ -2893,13 +2893,13 @@ function fillSalesInvoiceDetails(invoice){
 			 for(var j=0;j<plen;j++){ 			
 			 	var type=data[j]["type"];
 			 	var hsn=data[j]["hsn"];
-				var amount=Math.round(Number(data[j]["amount"]));
+				var amount=Number(data[j]["amount"]);
 				var cgst=data[j]["cgst"];
 				var sgst=data[j]["sgst"];						
 				var igst=data[j]["igst"];						
 				
 				var tax=Number(cgst)+Number(sgst)+Number(igst);
-				var taxamt=Math.round(((Number(amount)*Number(tax))/100));						
+				var taxamt=(Number(amount)*Number(tax))/100;						
 				var totalprice=Math.round((Number(amount)+Number(taxamt)));
 				totalSumAmt=Number(totalSumAmt)+Number(totalprice);
 				totalGSTAmt=Number(totalGSTAmt)+Number(taxamt);
@@ -2913,13 +2913,13 @@ function fillSalesInvoiceDetails(invoice){
 						'<p style="margin:0;text-align: right;">'+hsn+'</p>'+
 						'</div>'+
 						'<div style="width:15%;">'+
-						'<p style="margin:0;text-align: right;">'+numberWithCommas(Number(amount))+'</p>'+
+						'<p style="margin:0;text-align: right;">'+numberWithCommas(Math.round(Number(amount)))+'</p>'+
 						'</div>'+								
 						'<div style="width:8%;">'+
 						'<p style="margin:0;text-align: right;">'+tax+' %</p>'+
 						'</div>'+
 						'<div style="width:12%;">'+
-						'<p style="margin:0;text-align: right;">'+numberWithCommas(taxamt)+'</p>'+
+						'<p style="margin:0;text-align: right;">'+numberWithCommas(Math.round(taxamt))+'</p>'+
 						'</div>'+
 						'<div style="width:18%;">'+
 						'<p style="margin:0;text-align: right;">'+numberWithCommas(totalprice)+'</p>'+

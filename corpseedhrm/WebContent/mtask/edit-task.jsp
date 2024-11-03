@@ -448,7 +448,10 @@ if(contact!=null&&contact.length>0){
 </div>
 </div>
 <div class="flex_box justify_end col-md-8 col-sm-8 col-xs-12"> 
-<div class="filterBox_inner"> 
+<div class="filterBox_inner">
+<div class="filterBox_title box_shadow1 showAllocation" data-related="show_allocation" onclick="openAllocationBox()"><span>Allocation</span></div>
+</div>
+<div class="filterBox_inner">
 <div class="filterBox_title box_shadow1"><span>Follow up</span></div>
 <ul class="filterBox_dropdown"><%if(closeDate.equalsIgnoreCase("NA")){ %>
 <li><a class="openChat" data-related="open_chat" onclick="openChatBox()">Chat</a></li><%} %>
@@ -1375,6 +1378,105 @@ if(docAction!=null&&docAction.length>0){
 </div>
 </div>
 
+
+
+
+<%
+String[][] allocationList = Enquiry_ACT.getSalesPaymentAllocation(salesrefid, token);
+%>
+<div class="clearfix add_inner_box pad_box4 addcompany" id="show_allocation" style="display: none; width: 55%">
+<div class="close_icon close_box" style="right: 55%;"><i class="fa fa-times"></i></div>
+<div class="rttop_title">
+<h3 style="color: #42b0da;"><i class="fa fa-file-o"></i>Allocation List</h3> 
+</div>
+<div class="clearfix">
+<div class="clearfix mb10">
+<div class="clearfix bg_wht link-style12">
+   <div class="col-xs-2 box-intro-bg">
+       <div class="clearfix">
+       <p class="news-border">Financial Year</p>
+       </div>
+   </div>
+   <div class="col-xs-2 box-intro-bg">
+       <div class="clearfix">
+       <p class="news-border" title="">Portal Number</p>
+       </div>
+   </div>
+   <div class="col-xs-2 box-intro-bg">
+       <div class="clearfix">
+       <p class="news-border">PIBO Category</p>
+       </div>
+   </div> 
+   <div class="col-xs-2 box-intro-bg">
+       <div class="clearfix">
+       <p class="news-border">Credit Type</p>
+       </div>
+   </div>
+   <div class="col-xs-2 box-intro-bg">
+       <div class="clearfix">
+       <p class="news-border">Product Category</p>
+       </div>
+   </div> 
+   <div class="col-xs-1 box-intro-bg">
+       <div class="clearfix">
+       <p class="news-border">Quantity</p>
+       </div>
+   </div>
+   <div class="col-xs-1 box-intro-bg">
+       <div class="clearfix">
+       <p class="news-border">Comment</p>
+       </div>
+   </div>
+</div>
+<div class="clearfix" id="allocationListBox">
+<div class="clearfix bg_wht link-style12">
+<%
+if(allocationList !=null){
+	for(int i=0;i<allocationList.length;i++){
+		if(allocationList[i][0]!=null && allocationList[i][1]!=null){
+%>
+   <div class="col-xs-2 box-intro-background">
+       <div class="clearfix">
+       <p class="news-border"><%=allocationList[i][0].concat("-").concat(allocationList[i][1].substring(2)) %></p>
+       </div>
+   </div>
+   <div class="col-xs-2 box-intro-background">
+       <div class="clearfix">
+       <p class="news-border"><%=allocationList[i][2] %></p>
+       </div>
+   </div> 
+   <div class="col-xs-2 box-intro-background">
+       <div class="clearfix">
+       <p class="news-border"><%=allocationList[i][3] %></p>
+       </div>
+   </div> 
+   <div class="col-xs-2 box-intro-background">
+       <div class="clearfix">
+       <p class="news-border"><%=allocationList[i][4] %></p>
+       </div>
+   </div> 
+   <div class="col-xs-2 box-intro-background">
+       <div class="clearfix">
+       <p class="news-border"><%=allocationList[i][5] %></p>
+       </div>
+   </div> 
+   <div class="col-xs-1 box-intro-background">
+       <div class="clearfix">
+       <p class="news-border"><%=allocationList[i][6] %></p>
+       </div>
+   </div> 
+   <div class="col-xs-1 box-intro-background">
+       <div class="clearfix">
+       <p class="news-border" title="<%=allocationList[i][7] %>"><i class="fas fa fa-eye"></i></p>
+       </div>
+   </div>  
+ <%}}} %>                                    
+</div>
+</div>
+</div>
+</div>
+</div>
+
 <!-- Tool Tip -->
 <div class="clearfix add_inner_box pad_box4 addcompany" id="Task_Step" style="display: none;">
 <div class="close_icon close_box"><i class="fa fa-times"></i></div>
@@ -1524,7 +1626,7 @@ if(internalNotes!=null&&internalNotes.length>0){
 String followUp[][]=TaskMaster_ACT.getProjectsFollowUp(salesrefid,uaid,userRole,teamLeaderUid,token);
 if(followUp!=null&&followUp.length>0){
 	for(int i=0;i<followUp.length;i++){
-		String icon=followUp[i][11].substring(0,2);
+		String icon=(followUp[i][11]!=null) ? followUp[i][11].substring(0,2):"";
 		//getting extension and file size
 		String fileName=followUp[i][6];
 		String extension="";
@@ -3608,6 +3710,16 @@ function openDocumentBox(){
 	        }
 	    });	
 }
+function openAllocationBox(){
+	var id = $(".showAllocation").attr('data-related'); 
+	$('.fixed_right_box').addClass('active');
+	    $("div.add_inner_box").each(function(){
+	        $(this).hide();
+	        if($(this).attr('id') == id) {
+	            $(this).show();
+	        }
+	    });	
+}
 
 function openChatBox(){
 	var user="<%=loginUserName%>";
@@ -3731,6 +3843,7 @@ function submitChatReply(submitStatus,type,reason){
 	if(formName=="")formName="NA";
 	var form = $(".PublicChatReply")[0]; 
     var data = new FormData(form);
+  
     if(formDataJson=="")formDataJson="NA";
     data.append("formDataJson", formDataJson);
     data.append("deliveryDate", deliveryDate);

@@ -24,6 +24,7 @@ import com.azure.storage.blob.BlobClientBuilder;
 import com.oreilly.servlet.MultipartRequest;
 
 import admin.enquiry.Enquiry_ACT;
+import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import client_master.Clientmaster_ACT;
 import commons.AzureBlob;
@@ -56,15 +57,14 @@ public class SubmitPublicReply_CTRL extends HttpServlet {
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String docpath=properties.getProperty("path")+"documents";
-			String azure_key=properties.getProperty("azure_key");
-			String azure_path=properties.getProperty("azure_path");
+			String docBasePath=properties.getProperty("docBasePath");
+
 			String domain=properties.getProperty("domain");
 			String azure_container=properties.getProperty("azure_container");
 			
 		MultipartRequest m=new MultipartRequest(request,docpath,1024*1024*50);		
 					
 			File file=m.getFile("AttachChatFile");
-			
 			
 			if(file!=null){
 				imgname=file.getName();
@@ -74,19 +74,14 @@ public class SubmitPublicReply_CTRL extends HttpServlet {
 				imgname=key+"_"+imgname;
 				File newFile = new File(docpath+File.separator+imgname);
 				file.renameTo(newFile);
-				
-				BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-		        client.connectionString(azure_key);
-		        client.containerName(azure_container);
-		        InputStream targetStream = new FileInputStream(newFile);
-		        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
+				Thread.sleep(1000);
+				CloudService.uploadDocument(newFile, imgname);
 				
 		      //getting file size and extension
 				path = Paths.get(docpath+"/"+imgname);
 				long bytes=Files.size(path);
 				long kb=bytes/1024;
-				long mb=kb/1024;	
-				
+				long mb=kb/1024;				
 				
 				if(mb>=1)size=mb+" MB";
 				else if(kb>=1) size=kb+" KB";
@@ -94,9 +89,7 @@ public class SubmitPublicReply_CTRL extends HttpServlet {
 				int index=imgname.lastIndexOf(".");
 				extension=imgname.substring(index);
 		        
-		        
-//				targetStream.close();
-//				newFile.delete();
+				newFile.delete();
 				} 
 			
 			String content=m.getParameter("BoxContent");

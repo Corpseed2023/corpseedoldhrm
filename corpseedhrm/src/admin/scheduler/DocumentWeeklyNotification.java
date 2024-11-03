@@ -64,7 +64,7 @@ public class DocumentWeeklyNotification extends TimerTask {
 										,deliveryTat,status,uploaded),rowManager,workbookManager);
 					}
 					ExcelGenerator.uploadExportedFile(excelFilePathManager,workbookManager);
-					String filePathManager="https://corpseeds.blob.core.windows.net/corpseed-crm/"+excelFilePathManager;
+					String filePathManager="https://corpseednew.blob.core.windows.net/corpseed-crm/"+excelFilePathManager;
 //					System.out.println("filePathManager"+filePathManager);
 					String message=ExcelGenerator.findDocumentWeeklyMessage(date7DaysBefore, today, teams[t][2], filePathManager);
 					String emailTo=Usermaster_ACT.getUserEmail(teams[t][1], teams[t][3]);

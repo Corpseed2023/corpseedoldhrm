@@ -197,17 +197,17 @@ public class EnquiryAdd_CTRL extends HttpServlet {
 									double cgst=Double.parseDouble(product[j][4]);
 									double sgst=Double.parseDouble(product[j][5]);
 									double igst=Double.parseDouble(product[j][6]);
-									double price=Math.round(Double.parseDouble(product[j][2])*qty);
+									double price=CommonHelper.convertUptoDecimal((Double.parseDouble(product[j][2])*qty),2);
 									
 									if(cstatecode.equalsIgnoreCase(statecode)){
-										cgstprice=Math.round((price*cgst)/100);
-										sgstprice=Math.round((price*sgst)/100);
+										cgstprice=CommonHelper.findPercent(price,cgst);
+										sgstprice=CommonHelper.findPercent(price,sgst);
 										
-										totalprice=price+cgstprice+sgstprice;
+										totalprice=CommonHelper.convertUptoDecimalAndRound((price+cgstprice+sgstprice),2);
 										igst=0;
 									}else{
-										igstprice=Math.round((price*igst)/100);
-										totalprice=price+igstprice;
+										igstprice=CommonHelper.findPercent(price,igst);
+										totalprice=CommonHelper.convertUptoDecimalAndRound((price+igstprice),2);
 										sgst=0;
 										cgst=0;
 									}	
@@ -273,7 +273,7 @@ public class EnquiryAdd_CTRL extends HttpServlet {
 							+ "                         <tr>\n"
 							+ "                                <td style=\"padding: 15px 20px 20px;border: 15px solid #e5e5e5;text-align: center;\"> \n"
 							+ "                                  <h2 style=\"text-align: center;\">Estimate Amount</h2>\n"
-							+ "                                 <p style=\"text-align: center;\">Rs. "+CommonHelper.withLargeIntegers(estimateAmount)+"\n"
+							+ "                                 <p style=\"text-align: center;\">Rs. "+estimateAmount+"\n"
 							+ "                                  </p>\n"
 							+ "                                <p style=\"text-align: center;\">Estimate No. : "+newsalesid+"</p>\n"
 							+ "                                <p style=\"text-align: center;\">Estimate Date : "+today+" \n"

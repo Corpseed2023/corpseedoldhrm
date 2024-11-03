@@ -9,9 +9,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import commons.CommonHelper;
 import commons.DateUtil;
 import commons.DbCon;
 public class LoginAction {
@@ -1092,4 +1098,57 @@ public class LoginAction {
 		}
 		return newsdata;
 	}
+	
+	@SuppressWarnings("resource")
+	public static boolean isIpAllowedForAccess(String loginid, HttpServletRequest request) {
+	    ResultSet rsGCD = null;
+	    PreparedStatement psGCD = null;
+	    boolean result = false;
+	    Connection con = DbCon.getCon("", "", "");
+
+	    try {
+	    	String query = "select uaroletype from user_account where ualoginid = ?";
+	        psGCD = con.prepareStatement(query);
+	        psGCD.setString(1, loginid);
+	        rsGCD = psGCD.executeQuery();
+
+	        if (rsGCD != null && rsGCD.next()) {
+	            String roleType = rsGCD.getString("uaroletype");
+	            if ("Client".equalsIgnoreCase(roleType)) {
+	                return true;  
+	            }
+	        }
+
+	        String currentIp = CommonHelper.getExternalIP(request);
+	        System.out.println("ccccccc=="+currentIp);
+
+	        if (Objects.nonNull(currentIp)) {
+	            String query1 = "select ip from ip_access where ip = ?";
+	            psGCD = con.prepareStatement(query1);
+	            psGCD.setString(1, currentIp);
+	            rsGCD = psGCD.executeQuery();
+
+	            if (rsGCD != null && rsGCD.next()) {
+	                result = true;  
+	            }
+	        }
+
+	    } catch (Exception e) {
+	        log.info("Error in isIpAllowedForAccess: " + e.getMessage());
+	    } finally {
+	        try {
+	            // Close SQL objects
+	            if (psGCD != null) { psGCD.close(); }
+	            if (rsGCD != null) { rsGCD.close(); }
+	            if (con != null) { con.close(); }
+	        } catch (SQLException e) {
+	            log.info("Error closing resources in isIpAllowedForAccess: " + e.getMessage());
+	        }
+	    }
+	    
+	    return result;
+	}
+
+
+
 }

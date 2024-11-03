@@ -1,10 +1,8 @@
 package admin.enquiry;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
@@ -21,13 +19,12 @@ import org.apache.commons.lang.RandomStringUtils;
 import org.apache.log4j.Logger;
 import org.apache.pdfbox.util.PDFMergerUtility;
 
-import com.azure.storage.blob.BlobClientBuilder;
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
 
+import admin.master.CloudService;
 import admin.task.TaskMaster_ACT;
 import client_master.Clientmaster_ACT;
-import commons.AzureBlob;
 import commons.CommonHelper;
 import commons.DateUtil;
 
@@ -50,8 +47,6 @@ public class DownloadEstimateInvoice_CTRL extends HttpServlet {
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String dest=properties.getProperty("path")+"documents"+File.separator+"invoices.pdf";			
 			String path=properties.getProperty("path")+"download_invoice"+File.separator;
-			String azure_key=properties.getProperty("azure_key");
-			String azure_container=properties.getProperty("azure_container");
 			
 			String today=DateUtil.getCurrentDateIndianReverseFormat();
 			String time=DateUtil.getCurrentTime();
@@ -290,18 +285,10 @@ public class DownloadEstimateInvoice_CTRL extends HttpServlet {
     		    
     		    Thread.sleep(5000);
     		    
-    		    BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-    	        client.connectionString(azure_key);
-    	        client.containerName(azure_container);
-    	        //if file exist then delete
-    	        Boolean exists = client.blobName("invoices.pdf").buildClient().exists();
-    	        if(exists)client.blobName("invoices.pdf").buildClient().delete();
+    		    CloudService.deleteFileIfExist("invoices.pdf");
     	        
-    	        File inv_path = new File(dest);
-    	        InputStream targetStream = new FileInputStream(inv_path);    	        
-    	        client.blobName("invoices.pdf").buildClient().upload(targetStream,inv_path.length());
-    			targetStream.close();
-    		    
+    	        File inv_path = new File(dest);   	        
+    	        CloudService.uploadDocument(inv_path, "invoices.pdf");    		    
     		    
     		    FileUtils.cleanDirectory(new File(path)); 
 			}else {pw.write("fail");}

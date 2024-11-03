@@ -24612,3 +24612,17 @@ input[type='radio']{cursor: pointer;}
 }
 .w-100{width: 100%}
 .text-expired{color: #19283e}
+.p-0{padding: 0!important}
+.pt-9{padding-top: 9px}
+.AddPaymentModeule .collapse{
+	background-color: rgb(238, 238, 238);
+    padding: 11px;
+    margin-bottom: 10px;
+}
+.more-details{
+	border-bottom: 1px solid #eee;
+    border-right: 1px solid #a09797;
+    padding: 5px 0px 5px 0px;
+}
+.more-details label{padding-bottom: 2px;}
+.more-details input{border: none; max-width: 100%;}

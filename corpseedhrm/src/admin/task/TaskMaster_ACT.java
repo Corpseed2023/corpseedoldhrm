@@ -21871,8 +21871,9 @@ public class TaskMaster_ACT extends HttpServlet {
 			String query = "select m.msrefid,m.msinvoiceno,m.mscontactrefid,m.mssoldbyuid,m.mstoken,"
 					+ "m.msdeliverydate,b.cbdueamount FROM hrmclient_billing b join "
 					+ "managesalesctrl m on b.cbinvoiceno=m.msinvoiceno where b.cbdueamount>0 "
-					+ "and m.msworkpercent='100' and mscancelstatus='2' and m.msdeliverydate!='NA' "
-					+ "and str_to_date(m.msdeliverydate,'%d-%m-%Y')<'"+today+"' group by b.cbuid";
+					+ "and m.msworkpercent='100' and mscancelstatus='2' and m.auto_email='1' and m.msdeliverydate!='NA' "
+					+ "and STR_TO_DATE(m.msdeliverydate,'%d-%m-%Y')<'"+today+"' "
+					+ "AND STR_TO_DATE(m.msdeliverydate, '%d-%m-%Y') >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) group by b.cbuid";
 			stmnt = con.prepareStatement(query.toString());
 			rsGCD = stmnt.executeQuery();
 			rsGCD.last();
@@ -23415,6 +23416,39 @@ public class TaskMaster_ACT extends HttpServlet {
 			}
 		}
 		return data;
+	}
+
+	public static boolean isInvoiceConverted(String unbillno, String token) {
+		Connection con = DbCon.getCon("", "", "");
+		PreparedStatement ps = null;
+		ResultSet rset = null;
+		boolean getinfo = false;
+		try {
+			String queryselect = "SELECT sid FROM salesestimatepayment where sunbill_no='" + unbillno + "' and sunbill_no='"+ token
+					+ "' and sinvoice_status='1'";
+			ps = con.prepareStatement(queryselect);
+			rset = ps.executeQuery();
+			if (rset != null && rset.next()) {
+				getinfo = true;
+			}
+		} catch (Exception e) {
+			log.info("isInvoiceConverted" + e.getMessage());
+		} finally {
+			try {
+				// closing sql objects
+				if (ps != null) {
+					ps.close();
+				}
+				if (con != null) {
+					con.close();
+				}
+				if (rset != null)
+					rset.close();
+			} catch (SQLException e) {
+				log.info("isInvoiceConverted" + e.getMessage());
+			}
+		}
+		return getinfo;
 	}
 	
 }

@@ -64,7 +64,10 @@ public class ExcelGenerator {
 		}		
 	}
 	public static void uploadExportedFile(String excelFilePath,XSSFWorkbook workbook) {
+//		String basePath="D:\\eclipse space\\corpseedhrm\\WebContent\\exported";
 		String basePath="home/site/wwwroot/exported";
+//		String basePath="D:\\oldcrm_21sept\\crm_24jan\\WebContent\\exported";//for local changes and reports
+		
 		try {
 			FileOutputStream outputStream = new FileOutputStream(basePath+"/"+excelFilePath);
 	        workbook.write(outputStream);
@@ -74,7 +77,7 @@ public class ExcelGenerator {
 			Thread.sleep(2000);
 		
         
-	        String azure_key="DefaultEndpointsProtocol=https;AccountName=corpseeds;AccountKey=A+mKGi2AQc+Jl+O7x6pQ7OZb5Fu1kTPq/ooXRTTVX+Opzk9xOMiLGVx/h0mOLwJxnYsYDHyhD8mY9slX5/rcHQ==;EndpointSuffix=core.windows.net";
+	        String azure_key="DefaultEndpointsProtocol=https;AccountName=corpseednew;AccountKey=N05EHjAaC6CYvMayzKTDucQ0Srgg39Kd1SY2OJ1JBB1qmLL7ifuNUntw1PxutjcKWWo8YGeN9gY8+ASt1o9/3g==;EndpointSuffix=core.windows.net";
 	        String azure_container="corpseed-crm";
 	        
 	        BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);

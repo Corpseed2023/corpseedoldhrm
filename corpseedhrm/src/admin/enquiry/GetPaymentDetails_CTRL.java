@@ -50,6 +50,17 @@ public class GetPaymentDetails_CTRL extends HttpServlet {
 					json.put("service", payment[i][9]);
 					json.put("holdremarks", payment[i][10]);
 					json.put("povalidity", payment[i][11]);
+					String financialYear="NA";
+					if(payment[i][12]!=null && payment[i][13]!=null) {
+						financialYear = payment[i][12].concat("-").concat(payment[i][13].substring(2));
+					}
+					json.put("financialYear", financialYear);
+					json.put("portalNumber", payment[i][14]);
+					json.put("piboCategory", payment[i][15]);
+					json.put("creditType", payment[i][16]);
+					json.put("productCategory", payment[i][17]);
+					json.put("quantity", payment[i][18]);
+					json.put("comment", payment[i][19]);
 					
 					jsonArr.add(json);
 				}

@@ -57,10 +57,10 @@ public class SalesMonthlyReport extends TimerTask {
         				}
         				
         				ExcelGenerator.uploadExportedFile(excelFilePathOperation,workbookOperation);
-        				String filePathOperation="https://corpseeds.blob.core.windows.net/corpseed-crm/"+excelFilePathOperation;
+        				String filePathOperation="https://corpseednew.blob.core.windows.net/corpseed-crm/"+excelFilePathOperation;
         				//sending email to operation 
         				String messageOperation=ExcelGenerator.findSalesMonthlyMessage(startDate,endDate,deliveryManager[k][1],filePathOperation);
-        				Enquiry_ACT.saveEmail(deliveryManager[k][2], "sakshi.jaggi@corpseed.com", "Monthly Sales Report : "+startDate+" - "+endDate, messageOperation, 2, deliveryManager[k][3]);
+        				Enquiry_ACT.saveEmail(deliveryManager[k][2], "update@corpseed.com", "Monthly Sales Report : "+startDate+" - "+endDate, messageOperation, 2, deliveryManager[k][3]);
         				
         			}
 				}
@@ -104,13 +104,13 @@ public class SalesMonthlyReport extends TimerTask {
 					
 				}
 				ExcelGenerator.uploadExportedFile(excelFilePathQuality,workbookQuality);
-				String filePathQuality="https://corpseeds.blob.core.windows.net/corpseed-crm/"+excelFilePathQuality;			
+				String filePathQuality="https://corpseednew.blob.core.windows.net/corpseed-crm/"+excelFilePathQuality;			
 				
 //				System.out.println(filePathQuality);
 //				System.out.println(filePathOperation);
 				
 				String emailTo="navjot.singh@corpseed.com";
-				String emailToCC="vipan@corpseed.com";
+				String emailToCC="update@corpseed.com";
 				String Subject="Monthly Sales Report : "+startDate+" - "+endDate;
 				//sending email to quality 
 				String messageQuality=ExcelGenerator.findSalesMonthlyMessage(startDate,endDate,"Navjot",filePathQuality);

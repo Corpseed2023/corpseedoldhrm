@@ -276,15 +276,15 @@ try{
 								double sgstprice=0;
 								double igstprice=0;
 								double total=0;
-								double price=Math.round(Double.parseDouble(projprice[j][2])/Integer.parseInt(estproduct[i][3]));							
+								double price=CommonHelper.convertUptoDecimal(Double.parseDouble(projprice[j][2])/Integer.parseInt(estproduct[i][3]),2);							
 								double cgstpercent=Double.parseDouble(projprice[j][4]);
 								double sgstpercent=Double.parseDouble(projprice[j][5]);
 								double igstpercent=Double.parseDouble(projprice[j][6]);
-								if(cgstpercent>0){cgstprice=Math.round((price*cgstpercent)/100);}
-								if(sgstpercent>0){sgstprice=Math.round((price*sgstpercent)/100);}
-								if(igstpercent>0){igstprice=Math.round((price*igstpercent)/100);}
+								if(cgstpercent>0){cgstprice=CommonHelper.findPercent(price, cgstpercent);}
+								if(sgstpercent>0){sgstprice=CommonHelper.findPercent(price, sgstpercent);}
+								if(igstpercent>0){igstprice=CommonHelper.findPercent(price, igstpercent);}
 								
-								total=price+cgstprice+sgstprice+igstprice;
+								total=CommonHelper.convertUptoDecimalAndRound((price+cgstprice+sgstprice+igstprice),2);
 								String pricekey=RandomStringUtils.random(40, true, true);
 								//insert estimate price details into project price table
 								Enquiry_ACT.convertEstimatePriceToSale(pricekey,saleskey,prodrefid,projprice[j][1],price,projprice[j][3],cgstpercent,sgstpercent,igstpercent,cgstprice,sgstprice,igstprice,total,token,addedby);

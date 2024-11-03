@@ -34,9 +34,9 @@ public class ExecuteTimer implements ServletContextListener {
 //		      t.schedule(new ClientUpcomingDuePaymentSecheduler(), delay, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
 //			  t.schedule(new DocumentDailyNotification(), delay,TimeUnit.MILLISECONDS.convert(4,TimeUnit.HOURS));
 //    	  	  t.schedule(new PurchaseOrderReminder(), 1000L, TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
-//	          t.scheduleAtFixedRate(new DocumentWeeklyNotification(), new SimpleDateFormat("yyyy-MM-dd").parse("2023-09-24"), TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS));
-//			  t.scheduleAtFixedRate(new SalesWeeklyReport(), new SimpleDateFormat("yyyy-MM-dd").parse("2023-09-24"), TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS));
-//	    	  t.scheduleAtFixedRate(new SalesMonthlyReport(), new SimpleDateFormat("yyyy-MM-dd").parse("2023-10-01"), TimeUnit.MILLISECONDS.convert(31, TimeUnit.DAYS));
+//	          t.scheduleAtFixedRate(new DocumentWeeklyNotification(), new SimpleDateFormat("yyyy-MM-dd").parse("2024-10-13"), TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS));
+//			  t.scheduleAtFixedRate(new SalesWeeklyReport(), new SimpleDateFormat("yyyy-MM-dd").parse("2024-10-13"), TimeUnit.MILLISECONDS.convert(7, TimeUnit.DAYS));
+//	    	  t.scheduleAtFixedRate(new SalesMonthlyReport(), new SimpleDateFormat("yyyy-MM-dd").parse("2024-11-01"), TimeUnit.MILLISECONDS.convert(31, TimeUnit.DAYS));
 //		  		
 //	      } catch (Exception e) {
 //			e.printStackTrace();

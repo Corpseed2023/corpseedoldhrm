@@ -591,7 +591,8 @@ to sharing information about customers and suppliers.</p>
             	<option value="ms.msinvoicenotes as Invoice_Notes">Invoice Notes</option> 
             	<option value="ms.msjurisdiction as Jurisdiction">Jurisdiction</option>
             	<option value="ms.msprojectstatus as Work_Status">Work Status</option> 
-            	<option value="ms.msdeliverydate as Delivery_Date">Delivery Date</option>         
+            	<option value="ms.msdeliverydate as Delivery_Date">Delivery Date</option>   
+            	<option value="ms.msrefid as Assignee">Assignee</option>         
             </select>            
           </div>
          <div class="form-group">

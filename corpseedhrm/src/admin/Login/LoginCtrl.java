@@ -37,7 +37,7 @@ public class LoginCtrl extends HttpServlet {
 	}
 
 	@SuppressWarnings("static-access")
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		Properties properties = new Properties();
 		properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
@@ -67,13 +67,26 @@ public class LoginCtrl extends HttpServlet {
 		String loginuID = request.getParameter("userId");
 		String password = request.getParameter("userPassword");
 
-				
-		
-		
+					
 		InetAddress localhost = InetAddress.getLocalHost();
 		String ipaddress = (localhost.getHostAddress()).trim();
-//        System.out.println("ipaddress=="+ipaddress);
 		String remotehostname = request.getParameter("empbrowser");
+		
+		ipAllow = LoginAction.isIpAllowedForAccess(loginuID, request);
+		  ipAllow = LoginAction.isIpAllowedForAccess(loginuID, request);
+
+
+		    if (!ipAllow && !emproleid.equalsIgnoreCase("super admin")) {
+		        // If IP is not allowed and the user is not a super admin, deny access
+		        request.setAttribute("loginerrormsg", "Access Denied: Your IP is not allowed.");
+		        destination = "/403.html";  
+		        disp = request.getRequestDispatcher(destination);
+		        disp.forward(request, response);
+		        return; 
+		    }
+		
+      System.out.println("Ip test =="+ipAllow);
+
 
 		LoginAction loAction = new LoginAction();
 
@@ -174,6 +187,5 @@ public class LoginCtrl extends HttpServlet {
 			log.info("Servlet Exception in LoginCtrl Class while dispatching Page \n"+s.getMessage());
 		}
 	}
-
-	
 }
+	

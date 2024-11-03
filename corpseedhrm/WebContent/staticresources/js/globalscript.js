@@ -1204,6 +1204,21 @@ function validateNumber(elem) {
 $(document).ready(function(){
 	$('.no_copy_paste').bind('copy paste',function(e) {
     e.preventDefault(); return false; 
-});
+	});
+	var elements = document.getElementsByClassName('year-pattern');
+
+    // Attach event listener to each element with the class 'year-pattern'
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener('change', function() {
+            var yearInput = this.value;
+            var yearPattern = /^(19|20)\d{2}$/;
+
+            // If input doesn't match the pattern, clear the input
+            if (!yearPattern.test(yearInput)) {
+                this.value = '';
+                alert("Invalid year! Please enter a valid year from 2000");
+            }
+        });
+    }
 })
 

@@ -50,7 +50,7 @@ public class TaskStatus_CTRL extends HttpServlet {
 			imgname=key+"_"+imgname;
 			File newFile = new File(docpath+imgname);
 			file.renameTo(newFile);
-			fpath="https://corpseed.blob.core.windows.net/"+azure_container+File.separator+imgname;
+			fpath="https://corpseednew.blob.core.windows.net/"+azure_container+File.separator+imgname;
 			
 			BlobClientBuilder client = new BlobClientBuilder();
 	        client.connectionString(azure_key);

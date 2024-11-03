@@ -23,17 +23,19 @@ public class DbCon{
 //      corpseedhrmdmng corpseedweb Corp@418K#
 //      corpseed_hrm_test Ajay corp@123
 //      
-//      config.setJdbcUrl("jdbc:mysql://corpseedweb.mysql.database.azure.com:3306/corpseedhrmdmng?useSSL=true");
+//      config.setJdbcUrl("jdbc:mysql://corpseed-db.mysql.database.azure.com:3306/corpseedhrmdmng?useSSL=true");
 //      config.setUsername("corpseedweb");
-//      config.setPassword("Corp@418K#");
-      
-      config.setJdbcUrl("jdbc:mysql://localhost/corpseedcrm?useSSL=false");//corpseedhrmdmng
+//      config.setPassword("CoseeD#5454!");
+//////////      
+//      config.setJdbcUrl("jdbc:mysql://localhost/crm_26_08?useSSL=false");//corpseedhrmdmng
+      config.setJdbcUrl("jdbc:mysql://localhost/crm_25?useSSL=false");//corpseedhrmdmng
+//////////
       config.setUsername("root");
 	  config.setPassword("root");
-      
+//      
       config.setConnectionTimeout(30000);
-      config.setMinimumIdle(10);
-      config.setMaximumPoolSize(150);
+      config.setMinimumIdle(2);
+      config.setMaximumPoolSize(10);
       config.setIdleTimeout(300000);
       
       config.addDataSourceProperty("cachePrepStmts", "true");

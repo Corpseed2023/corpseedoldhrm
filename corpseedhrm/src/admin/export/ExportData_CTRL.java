@@ -49,6 +49,8 @@ public class ExportData_CTRL extends HttpServlet {
 			String loginuaid = (String)session.getAttribute("loginuaid");
 			String userRole= (String)session.getAttribute("userRole");
 			
+//			System.out.println(loginuaid+"\t"+userRole);
+			
 			String today=DateUtil.getCurrentDateIndianReverseFormat();
 			String time=DateUtil.getCurrentTime();
 			
@@ -148,6 +150,12 @@ public class ExportData_CTRL extends HttpServlet {
 				if(!salesProductAction.equalsIgnoreCase("NA"))sql.append(" and ms.msproductname='"+salesProductAction+"' ");
 				if(!salesClientAction.equalsIgnoreCase("NA"))sql.append(" and ms.mscompany='"+salesClientAction+"' ");
 				if(!salesSoldByUidAction.equalsIgnoreCase("NA"))sql.append(" and ms.mssoldbyuid='"+salesSoldByUidAction+"' ");
+				
+				if(!userRole.equalsIgnoreCase("NA")&&userRole.equalsIgnoreCase("Executive")) sql.append(" and ms.mssoldbyuid = '"+loginuaid+"' ");
+				else if(!userRole.equalsIgnoreCase("NA")&&(userRole.equalsIgnoreCase("Assistant")||userRole.equalsIgnoreCase("Manager")))
+					sql.append(" and exists(select t.mtid from manageteamctrl t join manageteammemberctrl m on t.mtrefid=m.tmteamrefid where t.mtadminid='"+loginuaid+"'"
+							+ " and m.tmuseruid=ms.mssoldbyuid or ms.mssoldbyuid='"+loginuaid+"') ");				
+					
 				
 				sql.append("group by ms.msid ");
 								

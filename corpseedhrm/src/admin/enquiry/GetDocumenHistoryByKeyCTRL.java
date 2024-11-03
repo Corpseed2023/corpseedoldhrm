@@ -34,8 +34,7 @@ public class GetDocumenHistoryByKeyCTRL extends HttpServlet {
 			
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
-			String azure_key=properties.getProperty("azure_key");
-			String azure_container=properties.getProperty("azure_container");
+		
 			
 			String history[][]=null;
 			if(!salesrefid.equalsIgnoreCase("NA"))
@@ -50,7 +49,7 @@ public class GetDocumenHistoryByKeyCTRL extends HttpServlet {
 					json.put("id", history[i][0]);
 					json.put("date", history[i][7]);
 					json.put("name", history[i][2]);
-					boolean exist=CommonHelper.isFileExists(history[i][9], azure_key, azure_container);
+					boolean exist=CommonHelper.isFileExists(history[i][9]);
 					if(exist) {
 						json.put("exist", 1);
 					}else {

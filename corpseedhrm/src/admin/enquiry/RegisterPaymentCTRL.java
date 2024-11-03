@@ -15,9 +15,10 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.RandomStringUtils;
 
-import com.azure.storage.blob.BlobClientBuilder;
+
 import com.oreilly.servlet.MultipartRequest;
 
+import admin.master.CloudService;
 import admin.master.Usermaster_ACT;
 import admin.task.TaskMaster_ACT;
 import commons.AzureBlob;
@@ -51,14 +52,34 @@ public class RegisterPaymentCTRL extends HttpServlet {
 			Properties properties = new Properties();
 			properties.load(getServletContext().getResourceAsStream("/staticresources/properties"));			
 			String docpath=properties.getProperty("path")+"documents";
-			String azure_key=properties.getProperty("azure_key");
-			String azure_container=properties.getProperty("azure_container");
-			String azure_path=properties.getProperty("azure_path");
-			String domain=properties.getProperty("domain");
+			MultipartRequest m=new MultipartRequest(request,docpath,1024*1024*50);
+			
+			String fromYear=m.getParameter("fromYear");
+			String toYear=m.getParameter("toYear");
+			String portalNumber=m.getParameter("portalNumber");
+			String piboCategory=m.getParameter("piboCategory");
+			String creditType=m.getParameter("creditType");
+			String productCategory=m.getParameter("productCategory");
+			String quantity=m.getParameter("quantity");
+			if(quantity == null || quantity.length()==0) {
+				quantity="0";
+			}
+			String comment=m.getParameter("comment");			
+			
+			String salesno=m.getParameter("WhichPaymentFor");
+			String moreDetailsServiceName = properties.getProperty("more_detail_service");
+			
+			if(!Enquiry_ACT.isMoreDetailsRequired(moreDetailsServiceName, salesno,fromYear,toYear,portalNumber,
+					piboCategory,creditType,productCategory,quantity,comment)) {
+			
+		
+			String domain=properties.getProperty("domain");		
+			String docBasePath=properties.getProperty("docBasePath");			
+
 			
 			String imgname="NA";
 			String imgpath="NA";
-			MultipartRequest m=new MultipartRequest(request,docpath,1024*1024*50);
+			
 			File file=m.getFile("choosefile");
 			if(file!=null){
 			docpath+=File.separator;
@@ -70,15 +91,13 @@ public class RegisterPaymentCTRL extends HttpServlet {
 			imgname=imgkey+"_"+imgname;
 			File newFile = new File(docpath+imgname);
 			file.renameTo(newFile);
-			imgpath=azure_path+azure_container+File.separator+imgname;
+			imgpath=docBasePath+imgname;
 			
-			BlobClientBuilder client=AzureBlob.getBlobClient(azure_key, azure_container);
-	        client.connectionString(azure_key);
-	        client.containerName(azure_container);
-	        InputStream targetStream = new FileInputStream(newFile);
-	        client.blobName(imgname).buildClient().upload(targetStream,newFile.length());
+		
+	       
+	       CloudService.uploadDocument(newFile, imgname);
 			
-			targetStream.close();
+		
 			newFile.delete();
 			
 			}
@@ -89,7 +108,7 @@ public class RegisterPaymentCTRL extends HttpServlet {
 			String pymtdate=m.getParameter("pymtdate");
 			String transactionid=m.getParameter("transactionid");
 			String amount=m.getParameter("transactionamount");
-			String salesno=m.getParameter("WhichPaymentFor");
+			
 			String company=m.getParameter("CompanyPaymentFor");
 			String clientrefid=m.getParameter("ClientPaymentFor");
 			String contactrefid=m.getParameter("ContactPaymentFor");
@@ -128,11 +147,13 @@ public class RegisterPaymentCTRL extends HttpServlet {
 				invoice_flag=Enquiry_ACT.isPaymentInvoiceExist(pinvoice, token);
 				if(invoice_flag)
 					pinvoice="INV"+today.replaceAll("-", "").substring(0,4)+today.substring(today.length()-2)+random;
-			}
+			}			
+		
 			
 			//add payment into virtual order
 			status=Enquiry_ACT.uploadSalesProductPayment(key,paymentmode,pymtdate,transactionid,amount,salesno,imgname,
-					imgpath,token,addedby,invoiceno,service_Name,pinvoice,remarks,loginuaid,serviceQty);
+					imgpath,token,addedby,invoiceno,service_Name,pinvoice,remarks,loginuaid,serviceQty,fromYear,toYear,portalNumber,
+					piboCategory,creditType,productCategory,Integer.parseInt(quantity),comment);
 			if(status){	
 				if(!paymentmode.equalsIgnoreCase("PO")) {
 					String typeAmount="0";
@@ -201,8 +222,8 @@ public class RegisterPaymentCTRL extends HttpServlet {
 					double discount=Enquiry_ACT.getEstimateDiscount(salesno, token);					
 					double orderamt=Enquiry_ACT.getOrderAmount(salesno, token);
 					
-					orderamt=CommonHelper.twoPoints(orderamt);
-					discount=CommonHelper.twoPoints(discount);
+					orderamt=CommonHelper.convertUptoDecimalAndRound(orderamt,2);
+					discount=CommonHelper.convertUptoDecimalAndRound(discount,2);
 					double paidamt=Enquiry_ACT.getPaidAmount(salesno, token);
 					orderamt-=discount;
 					double dueamt=orderamt-paidamt;
@@ -268,12 +289,15 @@ public class RegisterPaymentCTRL extends HttpServlet {
 					}
 				}
 			}
-			
 			if(status){
 				out.write("pass");
 			}else{
 				out.write("fail");
 			}
+			}else {
+				out.write("moreDetailsRequred");
+			}		
+			
 		}
 
 		catch (Exception e) {

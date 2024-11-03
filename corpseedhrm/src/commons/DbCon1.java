@@ -19,10 +19,10 @@ public static HikariDataSource getConnection() {
 //    config.setJdbcUrl("jdbc:mysql://corpseedweb.mysql.database.azure.com:3306/corpseedhrmdmng?useSSL=true");
 //    config.setUsername("corpseedweb");
 //    config.setPassword("Corp@418K#");
-      config.setJdbcUrl("jdbc:mysql://localhost/corpseedhrmdmng?useSSL=false");
-      config.setUsername("root");
-      config.setPassword("root");
-    
+//      config.setJdbcUrl("jdbc:mysql://localhost/corpseedhrmdmng?useSSL=false");
+//      config.setUsername("root");
+//      config.setPassword("root");
+//    
     config.setMaximumPoolSize(20);
     //add new config start
     config.setMinimumIdle(1);
